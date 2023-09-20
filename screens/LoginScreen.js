@@ -23,7 +23,9 @@ export default function LoginScreen() {
           ></Image>
         </View>
         <View style={styles.helloUser}>
-          <Text style={{ fontSize: 16, alignSelf: "center" }}>Xin chào!!!</Text>
+          <Text style={{ fontSize: 16, alignSelf: "center", color: "#a3a3a5" }}>
+            Xin chào!!!
+          </Text>
           <Text
             style={{ fontSize: 20, fontWeight: "bold", alignSelf: "center" }}
           >
@@ -38,8 +40,15 @@ export default function LoginScreen() {
           />
         </View>
         <View style={styles.actionForgot}>
-            <Text>Quên mật khẩu?</Text>
-            <Text>Đổi SĐT khác</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 16, color: "#054694" }}>
+            Quên mật khẩu?
+          </Text>
+          <Text style={{ fontWeight: "bold", fontSize: 16, color: "#054694" }}>
+            Đổi SĐT khác
+          </Text>
+        </View>
+        <View style={styles.loginSpace}>
+          <Text style={styles.buttonLogin}>Đăng nhập</Text>
         </View>
       </View>
       <StatusBar style="auto" />
@@ -57,7 +66,7 @@ const styles = StyleSheet.create({
   },
   formLogin: {
     flex: 1,
-    backgroundColor: "#35DADF",
+    backgroundColor: "#fff",
     height: 200,
     width: "100%",
     borderTopLeftRadius: 20,
@@ -91,12 +100,29 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderRadius: 10,
     paddingLeft: 10,
+    fontSize: 16,
   },
-    actionForgot: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        marginTop: 20,
-        width: '90%',
-        alignSelf: 'center'
-    }
+  actionForgot: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 5,
+    width: "90%",
+    alignSelf: "center",
+  },
+  loginSpace: {
+    backgroundColor: "#024a9c",
+    width: "90%",
+    alignSelf: "center",
+    marginTop: 30,
+    borderRadius: 40,
+    height: 45,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  buttonLogin: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 16,
+  },
 });
