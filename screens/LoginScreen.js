@@ -9,22 +9,27 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import React, { useCallback, useEffect, useState } from "react";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 
 export default function LoginScreen() {
-    const navigation = useNavigation();
-  const [password, setPassword] = useState('your_password');
+  const navigation = useNavigation();
+  const [password, setPassword] = useState("your_password");
 
   const checkPasswordAndNavigate = () => {
-    if (password === 'your_password') {
-      navigation.navigate('Home');
+    if (password === "your_password") {
+      navigation.navigate("Home");
     } else {
-      console.log('Wrong password!');
+      console.log("Wrong password!");
     }
   };
   return (
     <View style={styles.containerSr}>
-      <View style={styles.header}></View>
+      <View style={styles.header}>
+        <Image
+          style={styles.ImageLogin}
+          source={require("../assets/icons/ImageLogin.jpg")}
+        ></Image>
+      </View>
       <View style={styles.formLogin}>
         <View style={styles.containerLogo}>
           <Image
@@ -60,7 +65,10 @@ export default function LoginScreen() {
             Đổi SĐT khác
           </Text>
         </View>
-        <TouchableOpacity style={styles.loginSpace} onPress={checkPasswordAndNavigate}>
+        <TouchableOpacity
+          style={styles.loginSpace}
+          onPress={checkPasswordAndNavigate}
+        >
           <Text style={styles.buttonLogin}>Đăng nhập</Text>
         </TouchableOpacity>
       </View>
@@ -84,6 +92,11 @@ const styles = StyleSheet.create({
     width: "100%",
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
+  },
+  ImageLogin: {
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
   },
   containerLogo: {
     backgroundColor: "#fff",
