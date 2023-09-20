@@ -9,8 +9,19 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import React, { useCallback, useEffect, useState } from "react";
+import { useNavigation } from '@react-navigation/native';
 
 export default function LoginScreen() {
+    const navigation = useNavigation();
+  const [password, setPassword] = useState('your_password');
+
+  const checkPasswordAndNavigate = () => {
+    if (password === 'your_password') {
+      navigation.navigate('Home');
+    } else {
+      console.log('Wrong password!');
+    }
+  };
   return (
     <View style={styles.containerSr}>
       <View style={styles.header}></View>
@@ -37,6 +48,8 @@ export default function LoginScreen() {
             style={styles.textInputPw}
             secureTextEntry={true}
             placeholder="Mật khẩu"
+            onChangeText={(text) => setPassword(text)}
+            value={password}
           />
         </View>
         <View style={styles.actionForgot}>
@@ -47,9 +60,9 @@ export default function LoginScreen() {
             Đổi SĐT khác
           </Text>
         </View>
-        <View style={styles.loginSpace}>
+        <TouchableOpacity style={styles.loginSpace} onPress={checkPasswordAndNavigate}>
           <Text style={styles.buttonLogin}>Đăng nhập</Text>
-        </View>
+        </TouchableOpacity>
       </View>
       <StatusBar style="auto" />
     </View>

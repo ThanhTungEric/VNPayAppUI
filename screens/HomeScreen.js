@@ -6,6 +6,7 @@ export default function HomeScreen() {
   return (
     <View className="flex-1 relative">
         <Text>HomeScreen</Text>
+        <StatusBar style="auto" />
     </View>
   )
 }
