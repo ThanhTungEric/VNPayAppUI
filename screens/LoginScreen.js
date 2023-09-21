@@ -17,7 +17,7 @@ export default function LoginScreen() {
 
   const checkPasswordAndNavigate = () => {
     if (password === 'your_password') {
-      navigation.navigate('Home');
+      navigation.navigate('tabNavigation');
     } else {
       console.log('Wrong password!');
     }

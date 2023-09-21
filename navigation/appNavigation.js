@@ -1,9 +1,9 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomeScreen from "../screens/HomeScreen";
 import LoginScreen from "../screens/LoginScreen";
-import { LogBox, Text, View } from "react-native";
+import { LogBox} from "react-native";
+import tabNavigation from "./tabNavigation";
 
 const Stack = createNativeStackNavigator();
 
@@ -21,9 +21,9 @@ export default function AppNavigation() {
           component={LoginScreen}
         />
         <Stack.Screen
-          name="Home"
+          name="tabNavigation"
           options={{ headerShown: false }}
-          component={HomeScreen}
+          component={tabNavigation}
         />
       </Stack.Navigator>
     </NavigationContainer>
