@@ -1,54 +1,42 @@
+import React from "react";
 import {
   View,
   Text,
   Image,
   TextInput,
-  TouchableOpacity,
-  ScrollView,
   StyleSheet,
   KeyboardAvoidingView,
   Platform,
-  Button,
+  TouchableOpacity,
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import React, { useCallback, useEffect, useState } from "react";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import { Key } from "react-native-feather";
-import Modal from "react-native-modal";
-import ConfirmModal from "./ModalConfirmChangeRegister";
+import { useNavigation } from "@react-navigation/native";
 
-export default function LoginScreen() {
+const ChangePhoneNumberScreen = (props) => {
   const navigation = useNavigation();
-  const [password, setPassword] = useState("your_password");
-  const [isModalVisible, setModalVisible] = useState(false);
-  const route = useRoute();
-  const defaultName = "Nguyễn Thanh Tùng";
-  const name = route.params?.name || defaultName;
+  const [phoneNumber, setPhoneNumber] = React.useState("");
+  const [isValid, setIsValid] = React.useState(true);
 
-  // Hàm kiểm tra mật khẩu và chuyển màn hình
-  const checkPasswordAndNavigate = () => {
-    if (password === "your_password") {
-      navigation.navigate("Home");
-    } else {
-      console.log("Wrong password!");
+  // Hàm kiểm tra số điện thoại
+  const checkNumberPhone = () => {
+    const regex =
+      /^(086|096|097|098|039|038|037|036|035|034|032|033|091|094|088|083|084|085|081|082|070|079|077|076|078|089|090|093)\d{7}$/;
+    const validNum = regex.test(phoneNumber);
+    setIsValid(validNum); // Cập nhật trạng thái hợp lệ true/false
+    if (!validNum) {
+      alert("Số điện thoại không hợp lệ!");
+      console.log("Số điện thoại không hợp lệ!");
+    } else if (validNum) {
+      if (phoneNumber === "0787944346" || phoneNumber === "0812718942") {
+        alert("Số điện thoại hợp lệ!");
+        // Chuyển trang chủ của Tùng
+      } else {
+        // Chuyển trang đăng kí thông tin mới
+        navigation.navigate("InfoRegister", { phoneNumber });
+      }
     }
-  };
-  // Hàm chuyển màn hình đổi số điện thoại
-  const navigateToChangePhoneNumber = () => {
-    navigation.navigate("ChangePhoneNumber");
-    setModalVisible(!isModalVisible);
-  };
-  // Hàm chuyển màn hình quên mật khẩu
-  const navigateToForgotPassword = () => {
-    navigation.navigate("ForgotPassword");
-  };
-  // Hàm show modal
-  const toggleModal = () => {
-    setModalVisible(!isModalVisible);
-  };
-  // Hàm xác nhận chuyển màn hình đăng ký
-  const confirmChangeRegister = () => {
-    toggleModal();
+
+    console.log(validNum);
   };
 
   return (
@@ -57,13 +45,16 @@ export default function LoginScreen() {
       style={styles.containerSr}
     >
       <View style={styles.containerSr}>
+        {/* Header */}
         <View style={styles.header}>
           <Image
             style={styles.ImageLogin}
             source={require("../assets/icons/ImageLogin.jpg")}
           ></Image>
         </View>
+
         <View style={styles.formLogin}>
+          {/* Logo */}
           <View style={styles.containerLogo}>
             <Image
               style={styles.loginLogo}
@@ -71,58 +62,44 @@ export default function LoginScreen() {
               resizeMode="contain"
             ></Image>
           </View>
+          {/* Content */}
           <View style={styles.helloUser}>
+            <Text
+              style={{ fontSize: 25, fontWeight: "bold", alignSelf: "center" }}
+            >
+              Đăng nhập/Đăng ký
+            </Text>
             <Text
               style={{ fontSize: 16, alignSelf: "center", color: "#a3a3a5" }}
             >
-              Xin chào!!!
-            </Text>
-            <Text
-              style={{ fontSize: 20, fontWeight: "bold", alignSelf: "center" }}
-            >
-              {name}
+              Bạn hãy nhập số điện thoại để tiêp tục nhé!
             </Text>
           </View>
-          <View style={styles.inputPassword}>
+          {/* Input */}
+          <View style={styles.inputPhoneNumber}>
             <TextInput
-              style={styles.textInputPw}
-              secureTextEntry={true}
-              placeholder="Mật khẩu"
-              onChangeText={(text) => setPassword(text)}
-              value={password}
+              style={styles.textInputPhoneNum}
+              placeholder="Số điện thoại"
+              keyboardType="numeric"
+              onChangeText={(num) => {
+                setPhoneNumber(num);
+              }}
+              value={phoneNumber}
             />
           </View>
-
-          <View style={styles.actionForgot}>
-            <Button title="Quên mật khẩu?" onPress={navigateToForgotPassword}>
-              Quên mật khẩu?
-            </Button>
-
-            {/* Đổi số điện thoại */}
-            <TouchableOpacity>
-              <Button
-                title="Đổi SĐT khác"
-                onPress={confirmChangeRegister}
-              ></Button>
-              <ConfirmModal
-                isVisible={isModalVisible}
-                onConfirm={navigateToChangePhoneNumber}
-                onCancel={toggleModal}
-              />
-            </TouchableOpacity>
-          </View>
+          {/* Button */}
           <TouchableOpacity
             style={styles.loginSpace}
-            onPress={checkPasswordAndNavigate}
+            onPress={checkNumberPhone}
           >
-            <Text style={styles.buttonLogin}>Đăng nhập</Text>
+            <Text style={styles.buttonLogin}>Tiếp tục</Text>
           </TouchableOpacity>
         </View>
         <StatusBar style="auto" />
       </View>
     </KeyboardAvoidingView>
   );
-}
+};
 const styles = StyleSheet.create({
   containerSr: {
     flex: 1,
@@ -161,10 +138,10 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     marginTop: 20,
   },
-  inputPassword: {
+  inputPhoneNumber: {
     marginTop: 20,
   },
-  textInputPw: {
+  textInputPhoneNum: {
     height: 50,
     borderColor: "gray",
     borderWidth: 1,
@@ -199,3 +176,5 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+
+export default ChangePhoneNumberScreen;

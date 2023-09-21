@@ -25,6 +25,21 @@ export default function AppNavigation() {
           options={{ headerShown: false }}
           component={tabNavigation}
         />
+        <Stack.Screen
+          name="ChangePhoneNumber"
+          options={{ headerShown: false }}
+          component={ChangePhoneNumberScreen}
+        />
+        <Stack.Screen
+          name="ForgotPassword"
+          options={{ headerShown: false }}
+          component={ForgotPasswordScreen}
+        />
+        <Stack.Screen
+          name="InfoRegister"
+          options={{ headerShown: false }}
+          component={InfoRegisterScreen}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
