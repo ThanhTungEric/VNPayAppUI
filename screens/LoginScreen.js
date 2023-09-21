@@ -28,7 +28,7 @@ export default function LoginScreen() {
   // Hàm kiểm tra mật khẩu và chuyển màn hình
   const checkPasswordAndNavigate = () => {
     if (password === "your_password") {
-      navigation.navigate("Home");
+      navigation.navigate("tabNavigation");
     } else {
       console.log("Wrong password!");
     }

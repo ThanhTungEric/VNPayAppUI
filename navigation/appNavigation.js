@@ -4,6 +4,10 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "../screens/LoginScreen";
 import { LogBox} from "react-native";
 import tabNavigation from "./tabNavigation";
+import ChangePhoneNumberScreen from "../screens/ChangePhoneNumberScreen";
+import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
+import InfoRegisterScreen from "../screens/InfoRegisterScreen";
+
 
 const Stack = createNativeStackNavigator();
 
