@@ -94,16 +94,14 @@ export default function LoginScreen() {
           </View>
 
           <View style={styles.actionForgot}>
-            <Button title="Quên mật khẩu?" onPress={navigateToForgotPassword}>
+            <Text style={{color: "#024a9c" , fontWeight: "bold"}} onPress={navigateToForgotPassword}>
               Quên mật khẩu?
-            </Button>
+            </Text>
 
             {/* Đổi số điện thoại */}
             <TouchableOpacity>
-              <Button
-                title="Đổi SĐT khác"
-                onPress={confirmChangeRegister}
-              ></Button>
+              <Text style={{color: "#024a9c" , fontWeight: "bold"}} onPress={confirmChangeRegister}> 
+              Đổi SĐT khác</Text>
               <ConfirmModal
                 isVisible={isModalVisible}
                 onConfirm={navigateToChangePhoneNumber}

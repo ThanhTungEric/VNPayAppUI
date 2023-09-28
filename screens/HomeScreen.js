@@ -18,6 +18,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 import FavoriteFeature from "../Component/FavoriteFeature";
 import Service from "../Component/Service";
 import Poster from "../Component/Poster";
+import SuggestionForYou from "../Component/SuggestionForYou";
 
 export default function HomeScreen() {
   return (
@@ -108,19 +109,19 @@ export default function HomeScreen() {
           </View>
           <View style={styles.VNpayTaxi}>
             <Image style={{ width: 40, height: 40, resizeMode: "contain" }} source={require("../assets/icons/Vigiadinh.png")} />
-            <Text style={{ fontWeight: "bold", fontSize: 13 }}>VNPAY Taxi</Text>
+            <Text style={{ fontWeight: "bold", fontSize: 13 }}>Ví gia đình</Text>
           </View>
           <View style={styles.VNpayTaxi}>
             <Image style={{ width: 40, height: 40, resizeMode: "contain" }} source={require("../assets/icons/Vnshop.png")} />
-            <Text style={{ fontWeight: "bold", fontSize: 13 }}>VNPAY Taxi</Text>
+            <Text style={{ fontWeight: "bold", fontSize: 13 }}>VnShop</Text>
           </View>
           <View style={styles.VNpayTaxi}>
             <Image style={{ width: 40, height: 40, resizeMode: "contain" }} source={require("../assets/icons/TThoaDon.png")} />
-            <Text style={{ fontWeight: "bold", fontSize: 13 }}>VNPAY Taxi</Text>
+            <Text style={{ fontWeight: "bold", fontSize: 13 }}>TT Hóa đơn</Text>
           </View>
         </View>
       </View>
-      <View style={{ flexDirection: "row", position: "relative", top: -2 }}>
+      <View style={{ flexDirection: "row", position: "relative", top: -2}}>
         <Image style={{ width: 25, height: 25, resizeMode: "contain" }} source={require("../assets/icons/goc.png")} />
         <View style={styles.containerLogo}>
           <Image
@@ -141,7 +142,7 @@ export default function HomeScreen() {
         <FavoriteFeature />
         <Service/>
         <Poster/>
-        <Poster/>
+        <SuggestionForYou/>
       </ScrollView>
       <StatusBar style="auto" />
     </View>
@@ -153,7 +154,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 61,
+    marginBottom: 62,
   },
   headerHome: {
     width: "100%",
