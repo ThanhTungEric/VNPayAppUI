@@ -12,7 +12,7 @@ import {
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
 
-const ChangePhoneNumberScreen = (props) => {
+const ChangePhoneNumberScreen = () => {
   const navigation = useNavigation();
   const [phoneNumber, setPhoneNumber] = React.useState("");
   const [isValid, setIsValid] = React.useState(true);
@@ -28,8 +28,8 @@ const ChangePhoneNumberScreen = (props) => {
       console.log("Số điện thoại không hợp lệ!");
     } else if (validNum) {
       if (phoneNumber === "0787944346" || phoneNumber === "0812718942") {
-        alert("Số điện thoại hợp lệ!");
-        // Chuyển trang chủ của Tùng
+        // Chuyển trang đăng nhập
+        navigation.navigate("Login");
       } else {
         // Chuyển trang đăng kí thông tin mới
         navigation.navigate("InfoRegister", { phoneNumber });

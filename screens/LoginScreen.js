@@ -24,13 +24,16 @@ export default function LoginScreen() {
   const route = useRoute();
   const defaultName = "Nguyễn Thanh Tùng";
   const name = route.params?.name || defaultName;
+  // const helloName = name;
 
   // Hàm kiểm tra mật khẩu và chuyển màn hình
   const checkPasswordAndNavigate = () => {
     if (password === "your_password") {
+      // navigation.navigate("Home", { helloName });
       navigation.navigate("tabNavigation");
     } else {
       console.log("Wrong password!");
+      alert("Sai mật khẩu!");
     }
   };
   // Hàm chuyển màn hình đổi số điện thoại
@@ -57,12 +60,15 @@ export default function LoginScreen() {
       style={styles.containerSr}
     >
       <View style={styles.containerSr}>
+        {/* Header */}
         <View style={styles.header}>
           <Image
             style={styles.ImageLogin}
             source={require("../assets/icons/ImageLogin.jpg")}
           ></Image>
         </View>
+        {/* Body */}
+
         <View style={styles.formLogin}>
           <View style={styles.containerLogo}>
             <Image
@@ -78,7 +84,11 @@ export default function LoginScreen() {
               Xin chào!!!
             </Text>
             <Text
-              style={{ fontSize: 20, fontWeight: "bold", alignSelf: "center" }}
+              style={{
+                fontSize: 20,
+                fontWeight: "bold",
+                alignSelf: "center",
+              }}
             >
               {name}
             </Text>
@@ -94,16 +104,21 @@ export default function LoginScreen() {
           </View>
 
           <View style={styles.actionForgot}>
-            <Button title="Quên mật khẩu?" onPress={navigateToForgotPassword}>
+            <Text
+              style={{ color: "#024a9c", fontWeight: "bold" }}
+              onPress={navigateToForgotPassword}
+            >
               Quên mật khẩu?
-            </Button>
+            </Text>
 
             {/* Đổi số điện thoại */}
             <TouchableOpacity>
-              <Button
-                title="Đổi SĐT khác"
+              <Text
+                style={{ color: "#024a9c", fontWeight: "bold" }}
                 onPress={confirmChangeRegister}
-              ></Button>
+              >
+                Đổi SĐT khác
+              </Text>
               <ConfirmModal
                 isVisible={isModalVisible}
                 onConfirm={navigateToChangePhoneNumber}
@@ -111,6 +126,8 @@ export default function LoginScreen() {
               />
             </TouchableOpacity>
           </View>
+
+          {/* Button */}
           <TouchableOpacity
             style={styles.loginSpace}
             onPress={checkPasswordAndNavigate}

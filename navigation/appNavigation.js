@@ -2,12 +2,16 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "../screens/LoginScreen";
-import { LogBox} from "react-native";
+import { LogBox } from "react-native";
 import tabNavigation from "./tabNavigation";
 import ChangePhoneNumberScreen from "../screens/ChangePhoneNumberScreen";
 import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
 import InfoRegisterScreen from "../screens/InfoRegisterScreen";
-
+//
+import HomeScreen from "../screens/HomeScreen";
+import VoucherScreen from "../screens/VoucherScreen";
+import InfoVoucher from "../screens/InfoVoucher";
+import VoucherItem from "../screens/VoucherItem";
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +38,12 @@ export default function AppNavigation() {
           options={{ headerShown: false }}
           component={ChangePhoneNumberScreen}
         />
+        {/*  */}
+        <Stack.Screen
+          name="Home"
+          options={{ headerShown: false }}
+          component={HomeScreen}
+        />
         <Stack.Screen
           name="ForgotPassword"
           options={{ headerShown: false }}
@@ -43,6 +53,21 @@ export default function AppNavigation() {
           name="InfoRegister"
           options={{ headerShown: false }}
           component={InfoRegisterScreen}
+        />
+        <Stack.Screen
+          name="Voucher"
+          options={{ headerShown: false }}
+          component={VoucherScreen}
+        />
+        <Stack.Screen
+          name="InfoVoucher"
+          options={{ headerShown: false }}
+          component={InfoVoucher}
+        />
+        <Stack.Screen
+          name="VoucherItem"
+          options={{ headerShown: false }}
+          component={VoucherItem}
         />
       </Stack.Navigator>
     </NavigationContainer>

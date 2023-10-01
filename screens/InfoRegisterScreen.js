@@ -12,6 +12,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useCallback, useEffect, useState } from "react";
 const InfoRegister = () => {
   const navigation = useNavigation();
+  // truyền props
   const route = useRoute();
   const phoneNumber = route.params?.phoneNumber;
 
