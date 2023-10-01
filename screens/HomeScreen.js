@@ -8,21 +8,35 @@ import {
   StyleSheet,
 } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
+import { useNavigation, useIsFocused } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { FontAwesome } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Octicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from '@expo/vector-icons';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import FavoriteFeature from "../Component/FavoriteFeature";
 import Service from "../Component/Service";
 import Poster from "../Component/Poster";
 import SuggestionForYou from "../Component/SuggestionForYou";
 
+import BalanceScreen from "../Lever2Screen/BalanceScreen";
+const Stack = createNativeStackNavigator();
+
 export default function HomeScreen() {
+  const navigation = useNavigation();
+  const handleBalance = () => {
+    navigation.navigate("Balance");
+    console.log("Balance");
+  };
   return (
+    
     <View style={styles.homeScreen}>
+       <Stack.Navigator>
+        <Stack.Screen name="Balance" component={BalanceScreen} />
+      </Stack.Navigator>
       <View style={styles.headerHome}>
         <View style={{ flexDirection: "row", marginTop: 44 }}>
           <View style={styles.cricleUser}>
@@ -58,7 +72,8 @@ export default function HomeScreen() {
             style={{ flexGrow: 1 }}
 
           >
-            <View style={styles.soDuSpace}>
+            <TouchableOpacity onPress={()=> handleBalance()}>
+            <View style={styles.soDuSpace} >
               <View style={{ flexDirection: "row", alignItems: "center", }}>
                 <Image
                   style={styles.imageSoDu}
@@ -71,6 +86,7 @@ export default function HomeScreen() {
                 <MaterialIcons name="arrow-forward-ios" size={15} color="#fff" />
               </View>
             </View>
+            </TouchableOpacity>
             <View style={styles.poinSpace}>
               <View style={{ flexDirection: "row", alignItems: "center", }}>
                 <Image

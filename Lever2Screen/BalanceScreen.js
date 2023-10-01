@@ -13,14 +13,14 @@ import {
   export default function BalanceScreen() {
     return (
       <View style={styles.container}>
-        
+          <Text>This is balcen</Text>
       </View>
     );
   }
   const styles = StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: "#fff",
+      backgroundColor: "#111",
       alignItems: "center",
       justifyContent: "center",
     },

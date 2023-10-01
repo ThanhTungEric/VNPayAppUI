@@ -1,17 +1,20 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import HomeScreen from "../screens/HomeScreen";
 import Chat from "../screens/Chat";
 import MyWallet from "../screens/MyWallet";
 import VoucherScreen from "../screens/VoucherScreen";
 import ScanQR from "../screens/ScanQR";
+import {WalletScreenNavigator, HomeScreenNavigator, ChatScreenNavigator, VoucherScreenNavigator} from "../CustomNavigation";
 import { Platform, Text, View, Image } from "react-native";
 import { Entypo } from "@expo/vector-icons";
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const Tab = createBottomTabNavigator();
+
 
 const screenOptions = {
   tabBarShowLabel: false,
@@ -95,7 +98,7 @@ export default function TabNavigation() {
             }
           }}
         />
-        <Tab.Screen name="myWallet" component={MyWallet}
+        <Tab.Screen name="myWallet" component={WalletScreenNavigator}
           options={{
             tabBarIcon: ({ focused }) => {
               return (

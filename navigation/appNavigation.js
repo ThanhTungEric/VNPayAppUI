@@ -9,6 +9,7 @@ import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
 import InfoRegisterScreen from "../screens/InfoRegisterScreen";
 
 
+
 const Stack = createNativeStackNavigator();
 
 LogBox.ignoreLogs([
