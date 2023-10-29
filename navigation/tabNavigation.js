@@ -46,7 +46,7 @@ export default function TabNavigation() {
               const textColor = focused ? "#204c8b" : "#bababa";
               return (
                 <View style={{ alignItems: "center", justifyContent: "center" }}>
-                  <Image style={{ height: 25, resizeMode: 'contain' }} source={iconSource} />
+                  <Image style={{ height: 25,width: 25 , resizeMode: 'contain' }} source={iconSource} />
                   <Text style={{ fontSize: 12, color: textColor, fontWeight: "bold" }}>Trang chủ</Text>
                 </View>
               )
@@ -98,7 +98,7 @@ export default function TabNavigation() {
             }
           }}
         />
-        <Tab.Screen name="myWallet" component={WalletScreenNavigator}
+        <Tab.Screen name="myWallett" component={WalletScreenNavigator}
           options={{
             tabBarIcon: ({ focused }) => {
               return (

@@ -26,7 +26,7 @@ export default function SuggestionForYou() {
         style={{ flexGrow: 1 }}
       >
         <View style={styles.component}>
-          <View style={styles.image}></View>
+          <Image style={styles.image} source={require("../assets/sussgetion/image2.png")} />
           <View style={{ paddingHorizontal: 5, width: 200, justifyContent: "space-between" }}>
             <View>
               <Text style={{ fontWeight: "bold" }}>Mở Ví gia đình</Text>
@@ -39,7 +39,7 @@ export default function SuggestionForYou() {
                   width: 90,
                   borderRadius: 20,
                   borderColor: "#034994",
-                  borderWidth: 2,
+                  borderWidth: 1,
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -47,6 +47,60 @@ export default function SuggestionForYou() {
               >
                 <Text style={{ color: "#004a9b", fontWeight: "bold" }}>
                   Mở ví ngay
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View style={styles.component}>
+          <Image style={styles.image} source={require("../assets/sussgetion/image1.png")} />
+          <View style={{ paddingHorizontal: 5, width: 200, justifyContent: "space-between" }}>
+            <View>
+              <Text style={{ fontWeight: "bold" }}>Xem PHIM cuối tuần</Text>
+              <Text>Chọn VNPAY50 giảm 50k cho giao dịch từ 200K</Text>
+            </View>
+            <View style={{flexDirection: "row", justifyContent: "flex-end"}}>
+              <View
+                style={{
+                  height: 35,
+                  width: 90,
+                  borderRadius: 20,
+                  borderColor: "#034994",
+                  borderWidth: 1,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Text style={{ color: "#004a9b", fontWeight: "bold" }}>
+                  Đặt vé ngay
+                </Text>
+              </View>
+            </View>
+          </View>
+        </View>
+        <View style={styles.component}>
+          <Image style={styles.image} source={require("../assets/sussgetion/image3.png")} />
+          <View style={{ paddingHorizontal: 5, width: 200, justifyContent: "space-between" }}>
+            <View>
+              <Text style={{ fontWeight: "bold" }}>Mở tài khoản BIDV</Text>
+              <Text>Nhận ngay 130K tiền mặt khi mở tài khoản BIDV</Text>
+            </View>
+            <View style={{flexDirection: "row", justifyContent: "flex-end"}}>
+              <View
+                style={{
+                  height: 35,
+                  width: 90,
+                  borderRadius: 20,
+                  borderColor: "#034994",
+                  borderWidth: 1,
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Text style={{ color: "#004a9b", fontWeight: "bold" }}>
+                  Chi tiết
                 </Text>
               </View>
             </View>

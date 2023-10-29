@@ -21,6 +21,7 @@ import FavoriteFeature from "../Component/FavoriteFeature";
 import Service from "../Component/Service";
 import Poster from "../Component/Poster";
 import SuggestionForYou from "../Component/SuggestionForYou";
+import VnShop from "../Component/VnShop";
 
 import BalanceScreen from "../Lever2Screen/BalanceScreen";
 const Stack = createNativeStackNavigator();
@@ -159,6 +160,7 @@ export default function HomeScreen() {
         <Service/>
         <Poster/>
         <SuggestionForYou/>
+        <VnShop/>
       </ScrollView>
       <StatusBar style="auto" />
     </View>

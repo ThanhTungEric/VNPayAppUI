@@ -6,7 +6,9 @@ import BalanceScreen from "./Lever2Screen/BalanceScreen";
 const Stack = createStackNavigator();
 
 const HomeScreenNavigator = () => {
-  return <Stack.Navigator></Stack.Navigator>;
+  return <Stack.Navigator>
+    
+  </Stack.Navigator>;
 };
 export { HomeScreenNavigator };
 

@@ -18,7 +18,7 @@ export default function FavoriteFeature() {
             </View>
             <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 8, paddingTop: 8 }}>
                 <TouchableOpacity>
-                    <View style={{ alignItems: "center" }}>
+                    <View style={{ alignItems: "center"}}>
                         <Image style={styles.icon} source={require("../assets/icons/chuyentien.png")} />
                         <Text style={styles.text}>Chuyển tiền</Text>
                     </View>
