@@ -2,6 +2,7 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import MyWallet from "./screens/MyWallet";
 import BalanceScreen from "./Lever2Screen/BalanceScreen";
+import AccountInfo from "./WalletComponent/AccountInfo";
 
 const Stack = createStackNavigator();
 
@@ -23,8 +24,9 @@ export { ChatScreenNavigator };
 const WalletScreenNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="myWallet" component={MyWallet} />
+      <Stack.Screen name="myWallet" component={MyWallet} options={{ headerShown: false }} />
       <Stack.Screen name="BalanceScreen" component={BalanceScreen} />
+      <Stack.Screen name="AccountInfo" component={AccountInfo} />
     </Stack.Navigator>
   );
 };
