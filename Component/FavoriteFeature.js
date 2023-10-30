@@ -6,8 +6,16 @@ import {
     TouchableOpacity,
     ScrollView,
     StyleSheet,
+    FlatList,
 } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
+
+const favoriteFeature = [
+    {icon: require("../assets/icons/chuyentien.png"), text: "Chuyển tiền"},
+    {icon: require("../assets/icons/naptiendienthoai.png"), text: "Điểm quét VNPAY-QR"},
+    {icon: require("../assets/icons/quetmaqr.png"), text: "Nạp tiền điện thoại"},
+    {icon: require("../assets/icons/dien.png"), text: "Điện"},
+]
 
 export default function FavoriteFeature() {
     return (
@@ -16,31 +24,19 @@ export default function FavoriteFeature() {
                 <Text style={{ fontWeight: "bold", fontSize: 16 }}>Yêu thích</Text>
                 <Text style={{ fontWeight: "bold", color: "#054694" }}>Tùy chỉnh</Text>
             </View>
-            <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 8, paddingTop: 8 }}>
-                <TouchableOpacity>
-                    <View style={{ alignItems: "center"}}>
-                        <Image style={styles.icon} source={require("../assets/icons/chuyentien.png")} />
-                        <Text style={styles.text}>Chuyển tiền</Text>
+
+            <View style={{backgroundColor: "pink", justifyContent: "center", alignItems: "center"}}>
+            <FlatList
+                data={favoriteFeature}
+                numColumns={4}
+                style={{ marginTop: 10}}
+                renderItem={({ item }) => (
+                    <View style={{ alignItems: "center", width: 85 }}>
+                        <Image style={styles.icon} source={item.icon} />
+                        <Text style={styles.text}>{item.text}</Text>
                     </View>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <View style={{ alignItems: "center", width: 72 }}>
-                        <Image style={styles.icon} source={require("../assets/icons/naptiendienthoai.png")} />
-                        <Text style={styles.text}>Điểm quét VNPAY-QR</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <View style={{ alignItems: "center", width: 72 }}>
-                        <Image style={styles.icon} source={require("../assets/icons/quetmaqr.png")} />
-                        <Text style={styles.text}>Nạp tiền điện thoại</Text>
-                    </View>
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    <View style={{ alignItems: "center" }}>
-                        <Image style={styles.icon} source={require("../assets/icons/dien.png")} />
-                        <Text style={styles.text}>Điện</Text>
-                    </View>
-                </TouchableOpacity>
+                )}
+            />
             </View>
         </View>
     );
@@ -50,6 +46,7 @@ const styles = StyleSheet.create({
         width: "100%",
         height: 123,
         backgroundColor: "#fff",
+        paddingHorizontal: 10
     },
     title: {
         flexDirection: "row",

@@ -22,6 +22,8 @@ import { SimpleLineIcons } from '@expo/vector-icons';
 import { EvilIcons } from '@expo/vector-icons';
 import { Bold } from "react-native-feather";
 
+
+
 export default function AccountInfo() {
     return (
         <View style={styles.AccountInfoScreen}>

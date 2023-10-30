@@ -5,6 +5,7 @@ import {
     StyleSheet,
     Image,
     ScrollView,
+    FlatList,
 } from "react-native";
 import React from "react";
 import { StatusBar } from "expo-status-bar";
@@ -15,19 +16,19 @@ export default function VnShop() {
 
     return (
         <View style={styles.myWalletScreen}>
-            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }} >
+            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", }} >
                 <Image style={styles.image} source={require("../assets/something/imageVnShop.png")} />
                 <Text style={{ fontSize: 16, fontWeight: "bold", color: "#fff", marginRight: 20 }}>Xem tất cả</Text>
             </View>
-            <View style={{width: "100%", height: 190}}>
+            <View style={{ width: "100%", height: 190 }}>
                 <ScrollView
                     horizontal
                     showsHorizontalScrollIndicator={false}
                     style={{ flexGrow: 1, marginTop: 15, marginHorizontal: 10 }}
                 >
                     <View style={{ width: 120, height: 160, backgroundColor: "#fff", borderRadius: 15 }}>
-                    <View style={styles.flagTop} />
-      <View style={styles.flagBottom} />
+                        <View style={styles.flagTop} />
+                        <View style={styles.flagBottom} />
                     </View>
                 </ScrollView>
             </View>
@@ -51,8 +52,8 @@ const styles = StyleSheet.create({
         width: 110,
         height: 56,
         backgroundColor: "red",
-      },
-      flagBottom: {
+    },
+    flagBottom: {
         position: "absolute",
         left: 0,
         bottom: 0,
@@ -64,6 +65,6 @@ const styles = StyleSheet.create({
         borderLeftColor: "red",
         borderRightWidth: 55,
         borderRightColor: "red",
-      },
+    },
 
 });

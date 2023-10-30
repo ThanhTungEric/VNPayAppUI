@@ -16,9 +16,8 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { FontAwesome } from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';  
+import { Ionicons } from '@expo/vector-icons';
 import { SimpleLineIcons } from '@expo/vector-icons';
-
 
 export default function MyWallet() {
   const navigation = useNavigation();
@@ -28,7 +27,7 @@ export default function MyWallet() {
       <ScrollView
         vertical
         showsVerticalScrollIndicator={false}
-        style={{ flexGrow: 1, width: "100%", paddingHorizontal: 10, marginTop:40,}}>
+        style={{ flexGrow: 1, width: "100%", paddingHorizontal: 10, marginTop: 40, }}>
         <View style={styles.UserInfo}>
           <View style={styles.UserBorder}>
             <FontAwesome5 name="user-alt" size={35} color="#b8b8b8" />
@@ -36,6 +35,7 @@ export default function MyWallet() {
           <Text style={styles.UserName}>NGUYỄN THANH TÙNG</Text>
           <Text style={styles.PhoneNumber}>0812718942</Text>
         </View>
+
         <View style={styles.Account}>
           <Text style={{ color: "#b9b9b9" }}>TÀI KHOẢN</Text>
           <View style={styles.AccountInfo}>
@@ -135,16 +135,16 @@ export default function MyWallet() {
             <Text style={{ color: "#b9b9b9" }}>CÀI ĐẶT KHÁC</Text>
             <View style={styles.AccountInfo}>
               <View style={{ flexDirection: "row" }}>
-              <Ionicons name="language" size={20} color="black" />
+                <Ionicons name="language" size={20} color="black" />
                 <Text style={{ marginLeft: 10, marginTop: 2, fontWeight: "bold" }}> Ngôn ngữ </Text>
               </View>
-              <Text style={{color:"#b9b9b9",marginLeft:140}}> Tiếng Việt</Text>
+              <Text style={{ color: "#b9b9b9", marginLeft: 140 }}> Tiếng Việt</Text>
               <MaterialIcons name="navigate-next" size={24} color="#b9b9b9" />
             </View>
 
             <View style={styles.AccountInfo}>
               <View style={{ flexDirection: "row" }}>
-              <SimpleLineIcons name="exclamation" size={20} color="black" />
+                <SimpleLineIcons name="exclamation" size={20} color="black" />
                 <Text style={{ marginLeft: 10, marginTop: 2, fontWeight: "bold" }}> Thông tin chung </Text>
               </View>
               <MaterialIcons name="navigate-next" size={24} color="#b9b9b9" />
@@ -152,7 +152,7 @@ export default function MyWallet() {
 
             <View style={styles.AccountInfo}>
               <View style={{ flexDirection: "row" }}>
-              <Ionicons name="exit-outline" size={20} color="#e09099" />
+                <Ionicons name="exit-outline" size={20} color="#e09099" />
                 <Text style={{ marginLeft: 10, marginTop: 2, fontWeight: "bold" }}> Đăng xuất </Text>
               </View>
               <MaterialIcons name="navigate-next" size={24} color="#b9b9b9" />
@@ -171,7 +171,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom:60,
+    marginBottom: 60,
   },
   UserBorder: {
     backgroundColor: "#f0f0f0",
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
     color: "#b9b9b9"
   },
   Account: {
-    flexDirection: "column"
+    flexDirection: "column",
   },
   AccountInfo: {
     flexDirection: "row",

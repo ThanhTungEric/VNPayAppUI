@@ -6,107 +6,63 @@ import {
   TouchableOpacity,
   ScrollView,
   StyleSheet,
+  FlatList,
 } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 
+const sussgetion = [
+  { image: require("../assets/sussgetion/image1.png") , text: "Xem PHIM cuối tuần", text1: "Chọn VNPAY50 giảm 50k cho giao dịch từ 200K"},
+  { image: require("../assets/sussgetion/image2.png") , text: "Mở Ví gia đình", text1: "Mở Ví gia đình - nhà mình rinh quà 250k"},
+  { image: require("../assets/sussgetion/image3.png") , text: "Mở tài khoản BIDV", text1: "Nhận ngay 130K tiền mặt khi mở tài khoản BIDV"},
+];
+
 export default function SuggestionForYou() {
   return (
     <View style={styles.container}>
-      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+      <View style={{ flexDirection: "row", justifyContent: "space-between", paddingHorizontal: 10 }}>
         <Text style={{ fontWeight: "bold", fontSize: 16 }}>Gợi ý cho bạn</Text>
         <Text style={{ color: "#004a9b", fontWeight: "bold", fontSize: 16 }}>
           {" "}
           Xem tất cả
         </Text>
       </View>
-      <ScrollView
-        horizontal
+      <View style={{marginTop: 10}}>
+      <FlatList
+        data={sussgetion}
+        horizontal={true}
         showsHorizontalScrollIndicator={false}
-        style={{ flexGrow: 1 }}
-      >
-        <View style={styles.component}>
-          <Image style={styles.image} source={require("../assets/sussgetion/image2.png")} />
-          <View style={{ paddingHorizontal: 5, width: 200, justifyContent: "space-between" }}>
-            <View>
-              <Text style={{ fontWeight: "bold" }}>Mở Ví gia đình</Text>
-              <Text>Mở Ví gia đình - nhà mình rinh quà 250k</Text>
-            </View>
-            <View style={{flexDirection: "row", justifyContent: "flex-end"}}>
-              <View
-                style={{
-                  height: 35,
-                  width: 90,
-                  borderRadius: 20,
-                  borderColor: "#034994",
-                  borderWidth: 1,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Text style={{ color: "#004a9b", fontWeight: "bold" }}>
-                  Mở ví ngay
-                </Text>
+        renderItem={({ item }) => (
+          <View style={styles.component}>
+            <Image style={styles.image} source={item.image} />
+            <View style={{ paddingHorizontal: 5, width: 200, justifyContent: "space-between" }}>
+              <View>
+                <Text style={{ fontWeight: "bold" }}>{item.text}</Text>
+                <Text>{item.text1}</Text>
+              </View>
+              <View style={{flexDirection: "row", justifyContent: "flex-end"}}>
+                <View
+                  style={{
+                    height: 35,
+                    width: 90,
+                    borderRadius: 20,
+                    borderColor: "#034994",
+                    borderWidth: 1,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Text style={{ color: "#004a9b", fontWeight: "bold" }}>
+                    Mở ví ngay
+                  </Text>
+                </View>
               </View>
             </View>
           </View>
-        </View>
-        <View style={styles.component}>
-          <Image style={styles.image} source={require("../assets/sussgetion/image1.png")} />
-          <View style={{ paddingHorizontal: 5, width: 200, justifyContent: "space-between" }}>
-            <View>
-              <Text style={{ fontWeight: "bold" }}>Xem PHIM cuối tuần</Text>
-              <Text>Chọn VNPAY50 giảm 50k cho giao dịch từ 200K</Text>
-            </View>
-            <View style={{flexDirection: "row", justifyContent: "flex-end"}}>
-              <View
-                style={{
-                  height: 35,
-                  width: 90,
-                  borderRadius: 20,
-                  borderColor: "#034994",
-                  borderWidth: 1,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Text style={{ color: "#004a9b", fontWeight: "bold" }}>
-                  Đặt vé ngay
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-        <View style={styles.component}>
-          <Image style={styles.image} source={require("../assets/sussgetion/image3.png")} />
-          <View style={{ paddingHorizontal: 5, width: 200, justifyContent: "space-between" }}>
-            <View>
-              <Text style={{ fontWeight: "bold" }}>Mở tài khoản BIDV</Text>
-              <Text>Nhận ngay 130K tiền mặt khi mở tài khoản BIDV</Text>
-            </View>
-            <View style={{flexDirection: "row", justifyContent: "flex-end"}}>
-              <View
-                style={{
-                  height: 35,
-                  width: 90,
-                  borderRadius: 20,
-                  borderColor: "#034994",
-                  borderWidth: 1,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <Text style={{ color: "#004a9b", fontWeight: "bold" }}>
-                  Chi tiết
-                </Text>
-              </View>
-            </View>
-          </View>
-        </View>
-      </ScrollView>
+        )}
+      />
+      </View>
     </View>
   );
 }
@@ -126,7 +82,6 @@ const styles = StyleSheet.create({
     height: 120,
     borderRadius: 10,
     marginBottom: 10,
-    marginTop: 10,
     paddingHorizontal: 10,
     borderWidth: 1,
     borderColor: "gray"

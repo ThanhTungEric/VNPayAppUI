@@ -26,6 +26,10 @@ import VnShop from "../Component/VnShop";
 import BalanceScreen from "../Lever2Screen/BalanceScreen";
 const Stack = createNativeStackNavigator();
 
+const service = [
+
+]
+
 export default function HomeScreen() {
   const navigation = useNavigation();
   const handleBalance = () => {
@@ -154,7 +158,7 @@ export default function HomeScreen() {
       <ScrollView
         vertical
         showsVerticalScrollIndicator={false}
-        style={{ flexGrow: 1, width: "100%", paddingHorizontal: 10}}
+        style={{ flexGrow: 1, width: "100%"}}
       >
         <FavoriteFeature />
         <Service/>
