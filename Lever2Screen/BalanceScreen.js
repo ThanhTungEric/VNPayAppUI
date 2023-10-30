@@ -8,20 +8,19 @@ import {
   StyleSheet,
 } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
-import { StatusBar } from "expo-status-bar";
-import Message from "../Component/Message";
 
-export default function Chat() {
+export default function BalanceScreen() {
   return (
-    <View style={styles.chatScreen}>
-      <Message />
-      <StatusBar style="auto" />
+    <View style={styles.container}>
+      <Text>This is balcen</Text>
     </View>
   );
 }
 const styles = StyleSheet.create({
-  chatScreen: {
+  container: {
     flex: 1,
-    backgroundColor: "white",
+    backgroundColor: "red",
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

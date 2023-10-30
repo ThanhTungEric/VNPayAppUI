@@ -9,24 +9,103 @@ import {
   KeyboardAvoidingView,
   Platform,
   Button,
+  FlatList,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import InfoVoucher from "./InfoVoucher";
-import { useRoute } from "@react-navigation/native";
-import { StatusBar } from "expo-status-bar";
+
+const voucher = [
+  {
+    img: require("../assets/Voucher/disscount.png"),
+    header: "Mã VNPAY100 - Giảm 30% tối đa 100.000 đ khi Đặt vé tàu",
+    code: "VNPAY100",
+    expiry: "20/12/2023",
+  },
+
+  {
+    img: require("../assets/Voucher/disscount.png"),
+    header:
+      "Mã VNPAYXANHSM - Giảm 10 % tối đa 50.000 đ khi sử dụng dịch vụ VNPAY Taxi",
+    code: "VNPAYXÁNHM",
+    expiry: "20/12/2023",
+  },
+
+  {
+    img: require("../assets/Voucher/disscount.png"),
+    header: "Mã DEALABNTHAN - Giảm 30% tối đa 30.000 đ khi Đặt vé tàu",
+    code: "DEALABNTHAN",
+    expiry: "30/12/2023",
+  },
+
+  {
+    img: require("../assets/Voucher/disscount.png"),
+    header: "Mã VNPAY100 - Giảm 30% tối đa 100.000 đ khi Đặt vé tàu",
+    code: "VNPAY100",
+    expiry: "20/12/2023",
+  },
+
+  {
+    img: require("../assets/Voucher/disscount.png"),
+    header: "Mã VNPAY100 - Giảm 30% tối đa 100.000 đ khi Đặt vé tàu",
+    code: "VNPAY100",
+    expiry: "20/12/2023",
+  },
+
+  {
+    img: require("../assets/Voucher/disscount.png"),
+    header: "Mã PHIM60K - Giảm 40% tối đa 60k khi đătj vé xem phim",
+    code: "PHIM60K",
+    expiry: "21/12/2023",
+  },
+
+  {
+    img: require("../assets/Voucher/disscount.png"),
+    header:
+      "Mã DEALBANMOI - Giảm 50% tối đa 50.000 đ khi sử dụng dịch vụ VNPAY Taxi",
+    code: "DEALBANMOI",
+    expiry: "20/12/2023",
+  },
+];
+
 const VoucherItem = () => {
   const navigation = useNavigation();
-  const handleNavigateToInfoVoucher = () => {
-    navigation.navigate("InfoVoucher");
-  };
 
   return (
+    // <FlatList
+    //   data={voucher}
+    //   renderItem={({ item }) => {
+    //     return (
+    //       <TouchableOpacity>
+    //         <View style={styles.voucherContainer}>
+    //           <View style={styles.voucher}>
+    //             <TouchableOpacity>
+    //               <View style={styles.voucherHeader}>
+    //                 {/* Voucher Image */}
+    //                 <Image
+    //                   source={item.img}
+    //                   style={styles.voucherHeaderImg}
+    //                 ></Image>
+    //                 {/* Voucher Title */}
+    //                 <View style={styles.voucherHeaderTitle}>
+    //                   <Text style={{ fontWeight: "bold", padding: 10 }}>
+    //                     {item.header}
+    //                   </Text>
+    //                   <Text style={{ padding: 10 }}>{item.code}</Text>
+    //                 </View>
+    //               </View>
+    //             </TouchableOpacity>
+    //           </View>
+    //         </View>
+    //       </TouchableOpacity>
+    //     );
+    //   }}
+    // ></FlatList>
+
     <TouchableOpacity style={styles.voucherContainer}>
       <View style={styles.voucherContainer}>
         <View style={styles.voucher}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("VoucherItem");
+              navigation.navigate("InfoVoucher");
             }}
           >
             <View style={styles.voucherHeader}>
@@ -53,6 +132,7 @@ const VoucherItem = () => {
               <Text>Sử dụng ngay</Text>
               {/* Circular Voucher */}
             </View>
+            <View style={styles.circlee}></View>
           </TouchableOpacity>
         </View>
       </View>
@@ -86,7 +166,7 @@ const styles = StyleSheet.create({
   voucherHeaderImg: {
     width: "20%",
     height: "auto",
-    resizeMode: "cover",
+    resizeMode: "contain",
     marginLeft: 10,
     marginTop: 10,
     marginBottom: 5,
@@ -128,6 +208,16 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 93,
     left: -10,
+    zIndex: 1,
+  },
+  circlee: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    backgroundColor: "#ebf1f8",
+    position: "absolute",
+    top: 93,
+    left: 373,
     zIndex: 1,
   },
 });

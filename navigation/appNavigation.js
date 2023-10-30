@@ -9,9 +9,6 @@ import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
 import InfoRegisterScreen from "../screens/InfoRegisterScreen";
 //
 import HomeScreen from "../screens/HomeScreen";
-import VoucherScreen from "../screens/VoucherScreen";
-import InfoVoucher from "../screens/InfoVoucher";
-import VoucherItem from "../screens/VoucherItem";
 
 const Stack = createNativeStackNavigator();
 
@@ -53,21 +50,6 @@ export default function AppNavigation() {
           name="InfoRegister"
           options={{ headerShown: false }}
           component={InfoRegisterScreen}
-        />
-        <Stack.Screen
-          name="Voucher"
-          options={{ headerShown: false }}
-          component={VoucherScreen}
-        />
-        <Stack.Screen
-          name="InfoVoucher"
-          options={{ headerShown: false }}
-          component={InfoVoucher}
-        />
-        <Stack.Screen
-          name="VoucherItem"
-          options={{ headerShown: false }}
-          component={VoucherItem}
         />
       </Stack.Navigator>
     </NavigationContainer>

@@ -14,10 +14,11 @@ import { StatusBar } from "expo-status-bar";
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import MenuForVoucher from "../Component/MenuForVoucher";
-import { createStackNavigator } from "@react-navigation/stack";
+
 import VoucherItem from "./VoucherItem";
 
-const VoucherScreen = ({ navigation }) => {
+const VoucherScreen = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.voucherScreen}>
       {/* Header */}

@@ -9,17 +9,22 @@ import {
 } from "react-native";
 
 import React, { useCallback, useEffect, useState } from "react";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useNavigation, useIsFocused } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { FontAwesome } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { Octicons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import FavoriteFeature from "../Component/FavoriteFeature";
 import Service from "../Component/Service";
 import Poster from "../Component/Poster";
+import SuggestionForYou from "../Component/SuggestionForYou";
+
+import BalanceScreen from "../Lever2Screen/BalanceScreen";
+const Stack = createNativeStackNavigator();
 
 const getCurrentTime = () => {
   const currentDate = new Date();
@@ -44,6 +49,9 @@ export default function HomeScreen() {
   // const helloName = route.params?.helloName || "Nguyễn Thanh Tùng";
   return (
     <View style={styles.homeScreen}>
+      <Stack.Navigator>
+        <Stack.Screen name="Balance" component={BalanceScreen} />
+      </Stack.Navigator>
       <View style={styles.headerHome}>
         <View style={{ flexDirection: "row", marginTop: 44 }}>
           <View style={styles.cricleUser}>
@@ -79,33 +87,35 @@ export default function HomeScreen() {
             showsHorizontalScrollIndicator={false}
             style={{ flexGrow: 1 }}
           >
-            <View style={styles.soDuSpace}>
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Image
-                  style={styles.imageSoDu}
-                  source={require("../assets/icons/sodu.png")}
-                />
-                <AntDesign name="eye" size={18} color="#c9d9e8" />
-                <Text
-                  style={{ fontWeight: "bold", color: "#fff", marginLeft: 5 }}
+            <TouchableOpacity onPress={() => handleBalance()}>
+              <View style={styles.soDuSpace}>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <Image
+                    style={styles.imageSoDu}
+                    source={require("../assets/icons/sodu.png")}
+                  />
+                  <AntDesign name="eye" size={18} color="#c9d9e8" />
+                  <Text
+                    style={{ fontWeight: "bold", color: "#fff", marginLeft: 5 }}
+                  >
+                    9 524 232 234 VND
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginRight: 5,
+                  }}
                 >
-                  9 524 232 234 VND
-                </Text>
+                  <MaterialIcons
+                    name="arrow-forward-ios"
+                    size={15}
+                    color="#fff"
+                  />
+                </View>
               </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  marginRight: 5,
-                }}
-              >
-                <MaterialIcons
-                  name="arrow-forward-ios"
-                  size={15}
-                  color="#fff"
-                />
-              </View>
-            </View>
+            </TouchableOpacity>
             <View style={styles.poinSpace}>
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Image
@@ -187,21 +197,23 @@ export default function HomeScreen() {
               style={{ width: 40, height: 40, resizeMode: "contain" }}
               source={require("../assets/icons/Vigiadinh.png")}
             />
-            <Text style={{ fontWeight: "bold", fontSize: 13 }}>VNPAY Taxi</Text>
+            <Text style={{ fontWeight: "bold", fontSize: 13 }}>
+              Ví gia đình
+            </Text>
           </View>
           <View style={styles.VNpayTaxi}>
             <Image
               style={{ width: 40, height: 40, resizeMode: "contain" }}
               source={require("../assets/icons/Vnshop.png")}
             />
-            <Text style={{ fontWeight: "bold", fontSize: 13 }}>VNPAY Taxi</Text>
+            <Text style={{ fontWeight: "bold", fontSize: 13 }}>VnShop</Text>
           </View>
           <View style={styles.VNpayTaxi}>
             <Image
               style={{ width: 40, height: 40, resizeMode: "contain" }}
               source={require("../assets/icons/TThoaDon.png")}
             />
-            <Text style={{ fontWeight: "bold", fontSize: 13 }}>VNPAY Taxi</Text>
+            <Text style={{ fontWeight: "bold", fontSize: 13 }}>TT Hóa đơn</Text>
           </View>
         </View>
       </View>
@@ -237,7 +249,7 @@ export default function HomeScreen() {
         <FavoriteFeature />
         <Service />
         <Poster />
-        <Poster />
+        <SuggestionForYou />
       </ScrollView>
       <StatusBar style="auto" />
     </View>
@@ -249,7 +261,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
-    // marginBottom: 61,
+    marginBottom: 62,
   },
   headerHome: {
     width: "100%",
