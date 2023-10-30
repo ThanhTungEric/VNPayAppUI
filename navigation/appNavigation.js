@@ -2,13 +2,13 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import LoginScreen from "../screens/LoginScreen";
-import { LogBox} from "react-native";
+import { LogBox } from "react-native";
 import tabNavigation from "./tabNavigation";
 import ChangePhoneNumberScreen from "../screens/ChangePhoneNumberScreen";
 import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
 import InfoRegisterScreen from "../screens/InfoRegisterScreen";
-
-
+//
+import HomeScreen from "../screens/HomeScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -34,6 +34,12 @@ export default function AppNavigation() {
           name="ChangePhoneNumber"
           options={{ headerShown: false }}
           component={ChangePhoneNumberScreen}
+        />
+        {/*  */}
+        <Stack.Screen
+          name="Home"
+          options={{ headerShown: false }}
+          component={HomeScreen}
         />
         <Stack.Screen
           name="ForgotPassword"

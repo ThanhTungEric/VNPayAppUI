@@ -1,20 +1,23 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import HomeScreen from "../screens/HomeScreen";
 import Chat from "../screens/Chat";
 import MyWallet from "../screens/MyWallet";
 import VoucherScreen from "../screens/VoucherScreen";
 import ScanQR from "../screens/ScanQR";
-import {WalletScreenNavigator, HomeScreenNavigator, ChatScreenNavigator, VoucherScreenNavigator} from "../CustomNavigation";
+import {
+  WalletScreenNavigator,
+  HomeScreenNavigator,
+  ChatScreenNavigator,
+  VoucherScreenNavigator,
+} from "../CustomNavigation";
 import { Platform, Text, View, Image } from "react-native";
-import { Entypo } from "@expo/vector-icons";
-import { AntDesign } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
-
 
 const screenOptions = {
   tabBarShowLabel: false,
@@ -49,65 +52,128 @@ export default function TabNavigation() {
                   <Image style={{ height: 25,width: 25 , resizeMode: 'contain' }} source={iconSource} />
                   <Text style={{ fontSize: 12, color: textColor, fontWeight: "bold" }}>Trang chủ</Text>
                 </View>
-              )
-            }
+              );
+            },
+          }}
+        />
 
-          }}
-        />
-        <Tab.Screen name="voucher" component={VoucherScreen}
+        <Tab.Screen
+          name="voucher"
+          component={VoucherScreenNavigator}
           options={{
             tabBarIcon: ({ focused }) => {
               return (
-                <View style={{ alignItems: "center", justifyContent: "center" }}>
-                  <MaterialCommunityIcons name="ticket-confirmation-outline" size={26} color={focused ? "#204c8b" : "#bababa"} />
-                  <Text style={{ fontSize: 12, color: focused ? "#204c8b" : "#bababa", fontWeight: "bold" }}>Ưu đãi</Text>
+                <View
+                  style={{ alignItems: "center", justifyContent: "center" }}
+                >
+                  <MaterialCommunityIcons
+                    name="ticket-confirmation-outline"
+                    size={26}
+                    color={focused ? "#204c8b" : "#bababa"}
+                  />
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      color: focused ? "#204c8b" : "#bababa",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Ưu đãi
+                  </Text>
                 </View>
-              )
-            }
+              );
+            },
           }}
         />
-        <Tab.Screen name="scanQR" component={ScanQR}
+        <Tab.Screen
+          name="scanQR"
+          component={ScanQR}
           options={{
             tabBarIcon: ({ focused }) => {
               return (
-                <View style={{
-                  top: Platform.OS === 'ios' ? -10 : -20,
-                  width: Platform.OS === 'ios' ? 50 : 60,
-                  height: Platform.OS === 'ios' ? 50 : 60,
-                  borderRadius: Platform.OS === 'ios' ? 25 : 30,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  backgroundColor: '#fff',
-                }}>
-                  <Image style={{ width: 60, height: 60, resizeMode: "contain" }} source={require("../assets/icons/scanQRimg.png")} />
-                  <Text style={{ fontSize: 12, color: focused ? "#204c8b" : "#bababa", fontWeight: "bold" }}>Quét QR</Text>
+                <View
+                  style={{
+                    top: Platform.OS === "ios" ? -10 : -20,
+                    width: Platform.OS === "ios" ? 50 : 60,
+                    height: Platform.OS === "ios" ? 50 : 60,
+                    borderRadius: Platform.OS === "ios" ? 25 : 30,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: "#fff",
+                  }}
+                >
+                  <Image
+                    style={{ width: 60, height: 60, resizeMode: "contain" }}
+                    source={require("../assets/icons/scanQRimg.png")}
+                  />
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      color: focused ? "#204c8b" : "#bababa",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Quét QR
+                  </Text>
                 </View>
-              )
-            }
+              );
+            },
           }}
         />
-        <Tab.Screen name="chat" component={Chat}
+        <Tab.Screen
+          name="chat"
+          component={Chat}
           options={{
             tabBarIcon: ({ focused }) => {
               return (
-                <View style={{ alignItems: "center", justifyContent: "center" }}>
-                  <AntDesign name="message1" size={24} color={focused ? "#204c8b" : "#bababa"} />
-                  <Text style={{ fontSize: 12, color: focused ? "#204c8b" : "#bababa", fontWeight: "bold" }}>Chat</Text>
+                <View
+                  style={{ alignItems: "center", justifyContent: "center" }}
+                >
+                  <AntDesign
+                    name="message1"
+                    size={24}
+                    color={focused ? "#204c8b" : "#bababa"}
+                  />
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      color: focused ? "#204c8b" : "#bababa",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Chat
+                  </Text>
                 </View>
-              )
-            }
+              );
+            },
           }}
         />
-        <Tab.Screen name="myWallett" component={WalletScreenNavigator}
+        <Tab.Screen
+          name="myWallet"
+          component={WalletScreenNavigator}
           options={{
             tabBarIcon: ({ focused }) => {
               return (
-                <View style={{ alignItems: "center", justifyContent: "center" }}>
-                  <AntDesign name="wallet" size={26} color={focused ? "#204c8b" : "#bababa"} />
-                  <Text style={{ fontSize: 12, color: focused ? "#204c8b" : "#bababa", fontWeight: "bold" }}>Ví của tôi</Text>
+                <View
+                  style={{ alignItems: "center", justifyContent: "center" }}
+                >
+                  <AntDesign
+                    name="wallet"
+                    size={26}
+                    color={focused ? "#204c8b" : "#bababa"}
+                  />
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      color: focused ? "#204c8b" : "#bababa",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Ví của tôi
+                  </Text>
                 </View>
-              )
-            }
+              );
+            },
           }}
         />
       </Tab.Navigator>
