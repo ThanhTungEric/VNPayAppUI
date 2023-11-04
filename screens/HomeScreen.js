@@ -9,6 +9,8 @@ import {
 } from "react-native";
 
 import React, { useCallback, useEffect, useState } from "react";
+import { useRoute } from "@react-navigation/native";
+
 import { useNavigation, useIsFocused } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { FontAwesome } from "@expo/vector-icons";
@@ -24,14 +26,14 @@ import Poster from "../Component/Poster";
 import SuggestionForYou from "../Component/SuggestionForYou";
 import VnShop from "../Component/VnShop";
 
-import BalanceScreen from "../Lever2Screen/BalanceScreen";
-const Stack = createNativeStackNavigator();
+// import BalanceScreen from "../Lever2Screen/BalanceScreen";
+// const Stack = createNativeStackNavigator();
 
 const getCurrentTime = () => {
   const currentDate = new Date();
   const currentHour = currentDate.getHours();
   let time = "";
-  if (currentHour >= 5 && currentHour < 12) {
+  if (currentHour >= 5 && currentHour <= 10) {
     time = "Buổi sáng tốt lành!";
   } else if (currentHour >= 12 && currentHour < 18) {
     time = "Buổi chiều vui tươi!";
@@ -45,14 +47,16 @@ const getCurrentTime = () => {
 
 export default function HomeScreen() {
   const getTime = getCurrentTime();
+  const navigation = useNavigation();
 
-  // const route = useRoute();
-  // const helloName = route.params?.helloName || "Nguyễn Thanh Tùng";
+  const route = useRoute();
+  const amount = route.params ? route.params.amount : 0;
+  const [showAmount, setShowAmount] = useState(true);
   return (
     <View style={styles.homeScreen}>
-      <Stack.Navigator>
+      {/* <Stack.Navigator>
         <Stack.Screen name="Balance" component={BalanceScreen} />
-      </Stack.Navigator>
+      </Stack.Navigator> */}
       <View style={styles.headerHome}>
         <View style={{ flexDirection: "row", marginTop: 44 }}>
           <View style={styles.cricleUser}>
@@ -88,18 +92,26 @@ export default function HomeScreen() {
             showsHorizontalScrollIndicator={false}
             style={{ flexGrow: 1 }}
           >
-            <TouchableOpacity onPress={() => handleBalance()}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Amount", { amount })}
+            >
               <View style={styles.soDuSpace}>
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
                   <Image
                     style={styles.imageSoDu}
                     source={require("../assets/icons/sodu.png")}
                   />
-                  <AntDesign name="eye" size={18} color="#c9d9e8" />
+                  <TouchableOpacity onPress={() => setShowAmount(!showAmount)}>
+                    <AntDesign
+                      name={showAmount ? "eye" : "eyeo"}
+                      size={30}
+                      color="#c9d9e8"
+                    />
+                  </TouchableOpacity>
                   <Text
                     style={{ fontWeight: "bold", color: "#fff", marginLeft: 5 }}
                   >
-                    9 524 232 234 VND
+                    {showAmount ? amount + " VND" : "********"}
                   </Text>
                 </View>
                 <View
@@ -245,13 +257,13 @@ export default function HomeScreen() {
       <ScrollView
         vertical
         showsVerticalScrollIndicator={false}
-        style={{ flexGrow: 1, width: "100%"}}
+        style={{ flexGrow: 1, width: "100%" }}
       >
         <FavoriteFeature />
-        <Service/>
-        <Poster/>
-        <SuggestionForYou/>
-        <VnShop/>
+        <Service />
+        <Poster />
+        <SuggestionForYou />
+        <VnShop />
       </ScrollView>
       <StatusBar style="auto" />
     </View>

@@ -21,7 +21,7 @@ const MenuForVoucher = () => {
     "Tất cả",
     "Thể thao giải trí",
     "VNPAY Taxi",
-    "Đặt vé xe",
+    "Đặt vé tàu",
     "Đặt vé xem phim",
     "Đặt vé máy bay",
     "Khác",

@@ -13,7 +13,6 @@ import {
 import { StatusBar } from "expo-status-bar";
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import MenuForVoucher from "../Component/MenuForVoucher";
 
 import VoucherItem from "./VoucherItem";
 
@@ -72,9 +71,9 @@ const VoucherScreen = () => {
         </View>
       </View>
       {/* Type */}
-      <View>
+      {/* <View>
         <MenuForVoucher />
-      </View>
+      </View> */}
       {/* Voucher */}
 
       <VoucherItem />

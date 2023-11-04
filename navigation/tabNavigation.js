@@ -39,7 +39,7 @@ export default function TabNavigation() {
       <Tab.Navigator screenOptions={screenOptions}>
         <Tab.Screen
           name="Home"
-          component={HomeScreen}
+          component={HomeScreenNavigator}
           options={{
             tabBarIcon: ({ focused }) => {
               const iconSource = focused
@@ -48,9 +48,22 @@ export default function TabNavigation() {
 
               const textColor = focused ? "#204c8b" : "#bababa";
               return (
-                <View style={{ alignItems: "center", justifyContent: "center" }}>
-                  <Image style={{ height: 25,width: 25 , resizeMode: 'contain' }} source={iconSource} />
-                  <Text style={{ fontSize: 12, color: textColor, fontWeight: "bold" }}>Trang chủ</Text>
+                <View
+                  style={{ alignItems: "center", justifyContent: "center" }}
+                >
+                  <Image
+                    style={{ height: 25, width: 25, resizeMode: "contain" }}
+                    source={iconSource}
+                  />
+                  <Text
+                    style={{
+                      fontSize: 12,
+                      color: textColor,
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Trang chủ
+                  </Text>
                 </View>
               );
             },
