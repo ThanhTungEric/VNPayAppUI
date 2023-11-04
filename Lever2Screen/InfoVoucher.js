@@ -13,7 +13,8 @@ import {
 import React from "react";
 import { FontAwesome5 } from "@expo/vector-icons";
 
-const InfoVoucher = () => {
+const InfoVoucher = ({ navigation, route }) => {
+  const { item } = route.params;
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -26,15 +27,13 @@ const InfoVoucher = () => {
           style={styles.imgHeaderr}
         ></Image>
         <View style={styles.contentHeader}>
-          <Text style={styles.textt}>
-            Mã FLASH50K - Giảm 50K cho đơn từ 499K khi mua sắm VnShop
-          </Text>
+          <Text style={styles.textt}>{item.header}</Text>
           <View style={styles.code}>
             <View style={styles.flash}>
               <Text
                 style={{ color: "#c4d0e0", fontWeight: "bold", fontSize: 16 }}
               >
-                FLASH50K
+                {item.code}
               </Text>
             </View>
             <TouchableOpacity
@@ -60,14 +59,44 @@ const InfoVoucher = () => {
         ></View>
         <View style={styles.use}>
           <Text>Hạn sử dụng</Text>
-          <Text>Còn...</Text>
+          <Text>{item.expiry}</Text>
         </View>
       </View>
       <View style={styles.footer}>
-        <View style={styles.contentFooter}></View>
-        <TouchableOpacity>
-          <Text>Sử dụng ngay</Text>
-        </TouchableOpacity>
+        <Text
+          style={{ fontSize: 15, fontWeight: "bold", alignItems: "flex-start" }}
+        >
+          Điều kiện áp dụng
+        </Text>
+        <View style={{ flexDirection: "column", justifyContent: "flex-end" }}>
+          <View style={styles.contentFooter}>
+            <Text style={{ padding: 10, fontStyle: "italic" }}>
+              {item.condition}
+            </Text>
+          </View>
+          <View style={{ alignItems: "center", marginTop: 100 }}>
+            <TouchableOpacity
+              style={{
+                width: "90%",
+                height: 50,
+                backgroundColor: "#034a9c",
+                justifyContent: "center",
+                borderRadius: 30,
+              }}
+            >
+              <Text
+                style={{
+                  textAlign: "center",
+                  color: "white",
+                  fontWeight: "bold",
+                  fontSize: 20,
+                }}
+              >
+                Sử dụng ngay
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
     </View>
   );
@@ -95,7 +124,7 @@ const styles = StyleSheet.create({
     height: 50,
     resizeMode: "cover",
     position: "absolute",
-    top: 140,
+    top: 160,
     left: "45%",
     borderRadius: 15,
     zIndex: 1,
@@ -166,5 +195,12 @@ const styles = StyleSheet.create({
   use: {
     textAlign: "center",
   },
+  footer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "flex-start",
+    marginTop: 10,
+  },
+  contentFooter: {},
 });
 export default InfoVoucher;

@@ -1,4 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { useRoute } from "@react-navigation/native";
+
 import { useNavigation, useIsFocused } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -20,7 +22,7 @@ const getCurrentTime = () => {
   const currentDate = new Date();
   const currentHour = currentDate.getHours();
   let time = "";
-  if (currentHour >= 5 && currentHour < 12) {
+  if (currentHour >= 5 && currentHour <= 10) {
     time = "Buổi sáng tốt lành!";
   } else if (currentHour >= 12 && currentHour < 18) {
     time = "Buổi chiều vui tươi!";

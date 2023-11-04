@@ -7,7 +7,6 @@ import tabNavigation from "./tabNavigation";
 import ChangePhoneNumberScreen from "../screens/ChangePhoneNumberScreen";
 import ForgotPasswordScreen from "../screens/ForgotPasswordScreen";
 import InfoRegisterScreen from "../screens/InfoRegisterScreen";
-//
 import HomeScreen from "../screens/HomeScreen";
 
 const Stack = createNativeStackNavigator();
