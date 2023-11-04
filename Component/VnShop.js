@@ -6,10 +6,20 @@ import {
     Image,
     ScrollView,
     FlatList,
+    Pressable
 } from "react-native";
 import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
+
+const data = [
+    {image: require("../assets/vnpayshop/vnpayshop1.png")},
+    {image: require("../assets/vnpayshop/vnpayshop2.png")},
+    {image: require("../assets/vnpayshop/vnpayshop3.png")},
+    {image: require("../assets/vnpayshop/vnpayshop4.png")},
+    {image: require("../assets/vnpayshop/vnpayshop5.png")},
+    {image: require("../assets/vnpayshop/vnpayshop6.png")},
+];
 
 export default function VnShop() {
     const navigation = useNavigation();
@@ -20,17 +30,17 @@ export default function VnShop() {
                 <Image style={styles.image} source={require("../assets/something/imageVnShop.png")} />
                 <Text style={{ fontSize: 16, fontWeight: "bold", color: "#fff", marginRight: 20 }}>Xem tất cả</Text>
             </View>
-            <View style={{ width: "100%", height: 190 }}>
-                <ScrollView
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    style={{ flexGrow: 1, marginTop: 15, marginHorizontal: 10 }}
-                >
-                    <View style={{ width: 120, height: 160, backgroundColor: "#fff", borderRadius: 15 }}>
-                        <View style={styles.flagTop} />
-                        <View style={styles.flagBottom} />
+            <View style={{ width: "100%", height: 190}}>
+            <FlatList
+                data={data}
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                renderItem={({ item }) => (
+                    <View style={{ alignItems: "center", flexDirection: "row", marginHorizontal: 2.5 }}>
+                        <Image style={styles.image2} source={item.image} />
                     </View>
-                </ScrollView>
+                )}
+            />
             </View>
             <StatusBar style="auto" />
         </View>
@@ -48,23 +58,9 @@ const styles = StyleSheet.create({
         height: 39,
         resizeMode: "contain",
     },
-    flagTop: {
-        width: 110,
-        height: 56,
-        backgroundColor: "red",
+    image2: {
+        borderRadius: 10,
+        width: 120,
+        height: 160,
     },
-    flagBottom: {
-        position: "absolute",
-        left: 0,
-        bottom: 0,
-        width: 0,
-        height: 0,
-        borderBottomWidth: 13,
-        borderBottomColor: "transparent",
-        borderLeftWidth: 55,
-        borderLeftColor: "red",
-        borderRightWidth: 55,
-        borderRightColor: "red",
-    },
-
 });

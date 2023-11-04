@@ -2,7 +2,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import HomeScreen from "../screens/HomeScreen";
+
 import Chat from "../screens/Chat";
 import MyWallet from "../screens/MyWallet";
 import VoucherScreen from "../screens/VoucherScreen";
@@ -39,7 +39,7 @@ export default function TabNavigation() {
       <Tab.Navigator screenOptions={screenOptions}>
         <Tab.Screen
           name="Home"
-          component={HomeScreen}
+          component={HomeScreenNavigator}
           options={{
             tabBarIcon: ({ focused }) => {
               const iconSource = focused

@@ -28,7 +28,7 @@ export default function Service() {
                 <Text style={{ fontWeight: "bold", fontSize: 16 }}>Dịch vụ</Text>
                 <Text style={{ fontWeight: "bold", color: "#054694" }}>Xem thêm</Text>
             </View>
-            <View style={{ justifyContent: "center", alignItems: "center", backgroundColor: "pink", marginTop: 10 }}>
+            <View style={{ justifyContent: "center", alignItems: "center", marginTop: 10 }}>
                 <FlatList
                     data={service}
                     numColumns={4}
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     },
     borderIcon: {
         alignItems: "center",
-        width: 90,
+        width: 93,
         paddingHorizontal: 5
     },
     icon: {

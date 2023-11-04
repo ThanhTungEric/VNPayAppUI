@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingHorizontal: 10,
     borderWidth: 1,
-    borderColor: "gray"
+    borderColor: "#f0f0f0"
   },
   image: {
     width: 80,

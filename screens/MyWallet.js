@@ -19,8 +19,7 @@ import { Entypo } from '@expo/vector-icons';
 import { Ionicons } from '@expo/vector-icons';
 import { SimpleLineIcons } from '@expo/vector-icons';
 
-export default function MyWallet() {
-  const navigation = useNavigation();
+export default function MyWallet({navigation}) {
 
   return (
     <View style={styles.myWalletScreen}>

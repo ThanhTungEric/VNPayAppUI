@@ -9,6 +9,7 @@ import {
     FlatList,
 } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
+import { Pressable } from "react-native";
 
 const favoriteFeature = [
     {icon: require("../assets/icons/chuyentien.png"), text: "Chuyển tiền"},
@@ -17,7 +18,16 @@ const favoriteFeature = [
     {icon: require("../assets/icons/dien.png"), text: "Điện"},
 ]
 
-export default function FavoriteFeature() {
+export default function FavoriteFeature({navigation}) {
+    const handlePress = (item) => {
+        let screnName = '';
+        if (item.text === "Chuyển tiền") {
+            screnName = "Transfer";
+        } else if (item.text === "Điểm quét VNPAY-QR") {
+            screnName = "ScanQR";
+        }
+        navigation.navigate(screnName);
+    };
     return (
         <View style={styles.container}>
             <View style={styles.title}>
@@ -25,16 +35,16 @@ export default function FavoriteFeature() {
                 <Text style={{ fontWeight: "bold", color: "#054694" }}>Tùy chỉnh</Text>
             </View>
 
-            <View style={{backgroundColor: "pink", justifyContent: "center", alignItems: "center"}}>
+            <View style={{justifyContent: "center", alignItems: "center"}}>
             <FlatList
                 data={favoriteFeature}
                 numColumns={4}
                 style={{ marginTop: 10}}
                 renderItem={({ item }) => (
-                    <View style={{ alignItems: "center", width: 85 }}>
+                    <Pressable onPress={() => handlePress(item)} style={{ alignItems: "center", width: 90}}>
                         <Image style={styles.icon} source={item.icon} />
                         <Text style={styles.text}>{item.text}</Text>
-                    </View>
+                    </Pressable>
                 )}
             />
             </View>
