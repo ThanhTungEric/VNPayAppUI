@@ -58,20 +58,20 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <View style={styles.homeScreen}>
-      {showMenuFull ? <MenuFull /> : <Menu />}
+      {showMenuFull ? <MenuFull navigation={navigation} /> : <Menu />}
       <ScrollView
         onScroll={handleScroll}
         vertical
         showsVerticalScrollIndicator={false}
-        style={{ width: "100%"}}
+        style={{ width: "100%" }}
       >
-          <FavoriteFeature navigation={navigation}/>
-          <Service />
-          <Poster />
-          <SuggestionForYou />
-          <VnShop />
-          <Movie />
-          <Recent_Payment />
+        <FavoriteFeature navigation={navigation} />
+        <Service />
+        <Poster />
+        <SuggestionForYou />
+        <VnShop />
+        <Movie />
+        <Recent_Payment />
       </ScrollView>
       <StatusBar style="auto" />
     </View>

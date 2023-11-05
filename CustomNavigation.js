@@ -18,16 +18,20 @@ const Stack = createStackNavigator();
 
 const HomeScreenNavigator = () => {
   return (
-  <Stack.Navigator>
-    <Stack.Screen
+    <Stack.Navigator>
+      <Stack.Screen
         name="HomeScreen"
         component={HomeScreen}
         options={{ headerShown: false }}
       />
-    <Stack.Screen
+      <Stack.Screen
         name="Transfer"
         component={Transfer}
-        options={{ title: 'Chuyển tiền đến ví', headerTitleAlign: 'center', headerStyle: {height: 80} }}
+        options={{
+          title: "Chuyển tiền đến ví",
+          headerTitleAlign: "center",
+          headerStyle: { height: 80 },
+        }}
       />
       <Stack.Screen
         name="Amount"
@@ -38,12 +42,6 @@ const HomeScreenNavigator = () => {
       <Stack.Screen
         name="Recharge"
         component={RechargeScreen}
-        options={{ headerShown: false }}
-      />
-
-      <Stack.Screen
-        name="Transfer"
-        component={TransferScreen}
         options={{ headerShown: false }}
       />
 
