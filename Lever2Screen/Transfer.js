@@ -126,7 +126,7 @@ const Transfer = ({ navigation, route }) => {
     <ScrollView>
       <View>
         {/* Header */}
-        <View style={{ flexDirection: "row", marginTop: 40, paddingLeft: 20 }}>
+        {/* <View style={{ flexDirection: "row", marginTop: 40, paddingLeft: 20 }}>
           <View>
             <TouchableOpacity
               onPress={() => {
@@ -147,7 +147,7 @@ const Transfer = ({ navigation, route }) => {
               Chuyển tiền đến ví
             </Text>
           </View>
-        </View>
+        </View> */}
         {/* Input */}
         <View>
           <TextInput

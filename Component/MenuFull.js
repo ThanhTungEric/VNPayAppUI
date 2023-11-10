@@ -37,6 +37,8 @@ export default function MenuFull({ navigation }) {
   const amount = route.params ? route.params.amount : 0;
   const [showAmount, setShowAmount] = useState(true);
 
+  const point = 1000;
+
   return (
     <View
       style={{ width: "100%", justifyContent: "center", alignItems: "center" }}
@@ -77,7 +79,6 @@ export default function MenuFull({ navigation }) {
           >
             <TouchableOpacity
               onPress={() => navigation.navigate("Amount", { amount })}
-              //   onPress={() => navigation.navigate("Amount")}
             >
               <View style={styles.soDuSpace}>
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
@@ -113,32 +114,37 @@ export default function MenuFull({ navigation }) {
                 </View>
               </View>
             </TouchableOpacity>
-            <View style={styles.poinSpace}>
-              <View style={{ flexDirection: "row", alignItems: "center" }}>
-                <Image
-                  style={styles.imageSoDu}
-                  source={require("../assets/icons/poin.png")}
-                />
-                <Text
-                  style={{ fontWeight: "bold", color: "#fff", marginLeft: 5 }}
+            <TouchableOpacity
+              onPress={() => navigation.navigate("PointScreen", { point })}
+            >
+              <View style={styles.poinSpace}>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  <Image
+                    style={styles.imageSoDu}
+                    source={require("../assets/icons/poin.png")}
+                  />
+                  <Text
+                    style={{ fontWeight: "bold", color: "#fff", marginLeft: 5 }}
+                  >
+                    {point} điểm
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginRight: 5,
+                  }}
                 >
-                  10000 điểm
-                </Text>
+                  <MaterialIcons
+                    name="arrow-forward-ios"
+                    size={15}
+                    color="#fff"
+                  />
+                </View>
               </View>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  marginRight: 5,
-                }}
-              >
-                <MaterialIcons
-                  name="arrow-forward-ios"
-                  size={15}
-                  color="#fff"
-                />
-              </View>
-            </View>
+            </TouchableOpacity>
+
             <View style={styles.bankAccount}>
               <View style={{ flexDirection: "row", alignItems: "center" }}>
                 <Image
