@@ -11,6 +11,8 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert } from "react-native";
 
 const ChangePhoneNumberScreen = () => {
   const navigation = useNavigation();
@@ -18,25 +20,29 @@ const ChangePhoneNumberScreen = () => {
   const [isValid, setIsValid] = React.useState(true);
 
   // Hàm kiểm tra số điện thoại
-  const checkNumberPhone = () => {
+  const checkNumberPhone = async () => {
     const regex =
       /^(086|096|097|098|039|038|037|036|035|034|032|033|091|094|088|083|084|085|081|082|070|079|077|076|078|089|090|093)\d{7}$/;
     const validNum = regex.test(phoneNumber);
-    setIsValid(validNum); // Cập nhật trạng thái hợp lệ true/false
+    setIsValid(validNum);
+
     if (!validNum) {
-      alert("Số điện thoại không hợp lệ!");
-      console.log("Số điện thoại không hợp lệ!");
-    } else if (validNum) {
-      if (phoneNumber === "0787944346" || phoneNumber === "0812718942") {
-        // Chuyển trang đăng nhập
-        navigation.navigate("Login");
-      } else {
-        // Chuyển trang đăng kí thông tin mới
-        navigation.navigate("InfoRegister", { phoneNumber });
+      Alert.alert("Số điện thoại không hợp lệ!", "Vui lòng nhập số điện thoại hợp lệ.");
+    } else {
+      try {
+        const response = await fetch('https://650c005f47af3fd22f66d7d8.mockapi.io/api/user');
+        const users = await response.json();
+        const existingUser = users.find((user) => user.phone === phoneNumber);
+        if (existingUser) {
+          await AsyncStorage.setItem('user', JSON.stringify(existingUser));
+          navigation.navigate("Login");
+        } else {
+          navigation.navigate("InfoRegister", { phoneNumber });
+        }
+      } catch (error) {
+        console.error('Error during phone number check:', error);
       }
     }
-
-    console.log(validNum);
   };
 
   return (

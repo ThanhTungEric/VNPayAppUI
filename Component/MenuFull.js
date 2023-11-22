@@ -34,7 +34,7 @@ export default function MenuFull({ navigation }) {
   const getTime = getCurrentTime();
 
   const route = useRoute();
-  const amount = route.params ? route.params.amount : 0;
+  const amount = route.params ? route.params.amount : 0; 
   const [showAmount, setShowAmount] = useState(true);
 
   return (

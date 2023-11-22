@@ -141,13 +141,13 @@ export default function MyWallet({navigation}) {
               <MaterialIcons name="navigate-next" size={24} color="#b9b9b9" />
             </View>
 
-            <View style={styles.AccountInfo}>
+            <Pressable onPress={()=>{navigation.navigate("GeneralInfo")}} style={styles.AccountInfo}>
               <View style={{ flexDirection: "row" }}>
                 <SimpleLineIcons name="exclamation" size={20} color="black" />
                 <Text style={{ marginLeft: 10, marginTop: 2, fontWeight: "bold" }}> Thông tin chung </Text>
               </View>
               <MaterialIcons name="navigate-next" size={24} color="#b9b9b9" />
-            </View>
+            </Pressable>
 
             <View style={styles.AccountInfo}>
               <View style={{ flexDirection: "row" }}>

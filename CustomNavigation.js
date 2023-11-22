@@ -1,5 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
+import { Image } from "react-native";
 import MyWallet from "./screens/MyWallet";
 import BalanceScreen from "./Lever2Screen/BalanceScreen";
 import AccountInfo from "./WalletComponent/AccountInfo";
@@ -13,6 +14,13 @@ import AmountScreen from "./Lever2Screen/Amount";
 import RechargeScreen from "./Lever2Screen/Recharge";
 import WithdrawScreen from "./Lever2Screen/Withdraw";
 import TransferScreen from "./Lever2Screen/Transfer";
+
+// ScanQR
+import ScanQR from "./screens/ScanQR";
+import FindPersion from "./Lever2Screen/FindPersion";
+
+// Wallet
+import GeneralInfo from "./Lever2Screen/GeneralInfo";
 
 const Stack = createStackNavigator();
 
@@ -73,6 +81,38 @@ const VoucherScreenNavigator = () => {
 };
 export { VoucherScreenNavigator };
 
+const CustomHeaderTitle = () => (
+  <Image
+    style={{ width: 90, height: 40 }}
+    resizeMode="contain"
+    source={require('./assets/icons/scanQR.png')}
+  />
+);
+export default CustomHeaderTitle;
+
+const ScanQRScreenNavigator = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen
+        name="ScanQR"
+        component={ScanQR}
+        options={{
+          headerTitle: () => <CustomHeaderTitle />,
+          headerTitleAlign: "center",
+          headerStyle: { height: 80 },
+          headerLeft: null,
+        }}
+      />
+      <Stack.Screen
+        name="FindPersion"
+        component={FindPersion}
+        options={{ headerShown: false }}
+      />
+    </Stack.Navigator>
+  );
+}
+export { ScanQRScreenNavigator };
+
 const ChatScreenNavigator = () => {
   return <Stack.Navigator></Stack.Navigator>;
 };
@@ -88,6 +128,11 @@ const WalletScreenNavigator = () => {
       />
       <Stack.Screen name="BalanceScreen" component={BalanceScreen} />
       <Stack.Screen name="AccountInfo" component={AccountInfo} />
+      <Stack.Screen name="GeneralInfo" component={GeneralInfo} options={{
+          title: "Thông tin chung",
+          headerTitleAlign: "center",
+          headerStyle: { height: 80 },
+        }}/>
     </Stack.Navigator>
   );
 };
