@@ -11,6 +11,7 @@ import {
   WalletScreenNavigator,
   HomeScreenNavigator,
   ChatScreenNavigator,
+  ScanQRScreenNavigator,
   VoucherScreenNavigator,
 } from "../CustomNavigation";
 import { Platform, Text, View, Image } from "react-native";
@@ -35,7 +36,6 @@ const screenOptions = {
 
 export default function TabNavigation() {
   return (
-    <NavigationContainer independent={true}>
       <Tab.Navigator screenOptions={screenOptions}>
         <Tab.Screen
           name="Home"
@@ -100,8 +100,9 @@ export default function TabNavigation() {
         />
         <Tab.Screen
           name="scanQR"
-          component={ScanQR}
+          component={ScanQRScreenNavigator}
           options={{
+            tabBarStyle: { display: "none" },
             tabBarIcon: ({ focused }) => {
               return (
                 <View
@@ -190,6 +191,5 @@ export default function TabNavigation() {
           }}
         />
       </Tab.Navigator>
-    </NavigationContainer>
   );
 }

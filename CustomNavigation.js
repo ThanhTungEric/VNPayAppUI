@@ -3,7 +3,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Image } from "react-native";
 import MyWallet from "./screens/MyWallet";
 import BalanceScreen from "./Lever2Screen/BalanceScreen";
-import AccountInfo from "./WalletComponent/AccountInfo";
+// import AccountInfo from "./WalletComponent/AccountInfo";
 // Voucher
 import VoucherScreen from "./screens/VoucherScreen";
 import InfoVoucher from "./Lever2Screen/InfoVoucher";
@@ -59,7 +59,8 @@ const HomeScreenNavigator = () => {
           title: "Nạp tiền",
           headerTitleAlign: "center",
           headerStyle: { height: 80 },
-        }}/>
+        }}
+      />
 
       <Stack.Screen
         name="Withdraw"
@@ -104,7 +105,7 @@ const CustomHeaderTitle = () => (
   <Image
     style={{ width: 90, height: 40 }}
     resizeMode="contain"
-    source={require('./assets/icons/scanQR.png')}
+    source={require("./assets/icons/scanQR.png")}
   />
 );
 export default CustomHeaderTitle;
@@ -129,7 +130,7 @@ const ScanQRScreenNavigator = () => {
       />
     </Stack.Navigator>
   );
-}
+};
 export { ScanQRScreenNavigator };
 
 const ChatScreenNavigator = () => {
@@ -146,12 +147,16 @@ const WalletScreenNavigator = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen name="BalanceScreen" component={BalanceScreen} />
-      <Stack.Screen name="AccountInfo" component={AccountInfo} />
-      <Stack.Screen name="GeneralInfo" component={GeneralInfo} options={{
+      {/* <Stack.Screen name="AccountInfo" component={AccountInfo} /> */}
+      <Stack.Screen
+        name="GeneralInfo"
+        component={GeneralInfo}
+        options={{
           title: "Thông tin chung",
           headerTitleAlign: "center",
           headerStyle: { height: 80 },
-        }}/>
+        }}
+      />
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
     </Stack.Navigator>
   );

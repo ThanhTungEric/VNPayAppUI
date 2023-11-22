@@ -10,18 +10,20 @@ import {
 } from "react-native";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useCallback, useEffect, useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const InfoRegister = () => {
   const navigation = useNavigation();
   // truyền props
   const route = useRoute();
   const phoneNumber = route.params?.phoneNumber;
+  console.log(phoneNumber);
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [retypePassword, setRetypePassword] = useState("");
 
-  // Hàm kiểm tra tên
+  // Hàm kiểm tra họ tên
   const checkName = () => {
     const regexName =
       /^[A-Za-z\sáàảãạăắằẳẵặâấầẩẫậéèẻẽẹêếềểễệíìỉĩịóòỏõọôốồổỗộơớờởỡợúùủũụưứừửữựýỳỷỹỵÁÀẢÃẠĂẮẰẲẴẶÂẤẦẨẪẬÉÈẺẼẸÊẾỀỂỄỆÍÌỈĨỊÓÒỎÕỌÔỐỒỔỖỘƠỚỜỞỠỢÚÙỦŨỤƯỨỪỬỮỰÝỲỶỸỴ-]+$/;
@@ -62,22 +64,43 @@ const InfoRegister = () => {
     }
   };
 
-  const Register = () => {
+  const Register = async () => {
     const isNameValid = checkName();
     const isEmailValid = checkEmail();
     const isPasswordValid = checkPassword();
     const isRetypePasswordValid = checkRetypePassword();
-
-    if (
-      isNameValid &&
-      isEmailValid &&
-      isPasswordValid &&
-      isRetypePasswordValid
-    ) {
-      navigation.navigate("Login", { name });
-      alert("Đăng ký thành công!");
+  
+    if (isNameValid && isEmailValid && isPasswordValid && isRetypePasswordValid) {
+      try {
+        const response = await fetch('https://650c005f47af3fd22f66d7d8.mockapi.io/api/user', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            fullName: name,
+            phone: phoneNumber,
+            password,
+            email,
+            accountBalance: 0,
+            point: 0,
+          }),
+        });
+        if (response.ok) {
+          const userData = await response.json();
+          await AsyncStorage.setItem('user', JSON.stringify(userData));
+          alert('Đăng ký thành công!');
+          navigation.navigate('Login');
+        } else {
+          alert('Đăng ký không thành công. Vui lòng thử lại.');
+        }
+      } catch (error) {
+        console.error('Error during registration:', error);
+        alert('Đã có lỗi xảy ra. Vui lòng thử lại sau.');
+      }
     }
   };
+  
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}

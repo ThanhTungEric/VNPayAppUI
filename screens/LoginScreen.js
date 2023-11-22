@@ -13,30 +13,43 @@ import {
 import { StatusBar } from "expo-status-bar";
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { Key } from "react-native-feather";
-import Modal from "react-native-modal";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import ConfirmModal from "./ModalConfirmChangeRegister";
 
 export default function LoginScreen() {
   const navigation = useNavigation();
-  const [password, setPassword] = useState("your_password");
+  const [password, setPassword] = useState("");
+  const [name, setDefaultName] = useState("Nguyễn Thanh Tùng");
   const [isModalVisible, setModalVisible] = useState(false);
-  const route = useRoute();
-  const defaultName = "Nguyễn Thanh Tùng";
-  const name = route.params?.name || defaultName;
-  // const helloName = name;
+  const [userData, setUserData] = useState(null);
+  
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const userData = await AsyncStorage.getItem('user');
+        if (userData !== null) {
+          const userObject = JSON.parse(userData);
+          if (userObject.fullName) {
+            setDefaultName(userObject.fullName);
+            setUserData(userObject);
+          }
+        }
+      } catch (error) {
+        console.error('Error retrieving user data:', error);
+      }
+    };
+    getUserData();
+  }, [userData]);
 
-  // Hàm kiểm tra mật khẩu và chuyển màn hình
+  
   const checkPasswordAndNavigate = () => {
-    if (password === "your_password") {
-      // navigation.navigate("Home", { helloName });
+    if (password === userData.password) {
       navigation.navigate("tabNavigation");
     } else {
-      console.log("Wrong password!");
-      alert("Sai mật khẩu!");
+      alert("Mật khẩu không đúng");
     }
-  };
-  // Hàm chuyển màn hình đổi số điện thoại
+  }
+  
   const navigateToChangePhoneNumber = () => {
     navigation.navigate("ChangePhoneNumber");
     setModalVisible(!isModalVisible);
