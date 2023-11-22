@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -15,6 +15,7 @@ import {
   MaterialIcons,
   AntDesign,
 } from "@expo/vector-icons";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const getCurrentTime = () => {
   const currentDate = new Date();
   const currentHour = currentDate.getHours();
@@ -31,13 +32,32 @@ const getCurrentTime = () => {
   return time;
 };
 export default function MenuFull({ navigation }) {
+  const [userData, setUserData] = useState(null);
   const getTime = getCurrentTime();
 
   const route = useRoute();
-  const amount = route.params ? route.params.amount : 0; 
+  const [amount, setAmount] = useState(0);
   const [showAmount, setShowAmount] = useState(true);
-
-  const point = 1000;
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const userData = await AsyncStorage.getItem('user');
+        if (userData !== null) {
+          const userObject = JSON.parse(userData);
+          console.log("data ở Menufull.js", userObject);
+          if (userObject.fullName) {
+            setUserData(userObject);
+          }
+          if (userObject.accountBalance) {
+            setAmount(userObject.accountBalance);
+          }
+        }
+      } catch (error) {
+        console.error('Error retrieving user data:', error);
+      }
+    };
+    getUserData();
+  }, []);
 
   return (
     <View
@@ -52,7 +72,7 @@ export default function MenuFull({ navigation }) {
             <View style={styles.userName}>
               <Text>{getTime}</Text>
               <Text style={{ fontWeight: "bold", fontSize: 15 }}>
-                Nguyễn Thành Luân
+                {userData ? userData.fullName : "null"}
               </Text>
             </View>
             <View style={{ flexDirection: "row", marginRight: 15 }}>
@@ -96,7 +116,7 @@ export default function MenuFull({ navigation }) {
                   <Text
                     style={{ fontWeight: "bold", color: "#fff", marginLeft: 5 }}
                   >
-                    {showAmount ? amount + " VND" : "********"}
+                    {showAmount ? amount : "******"} VND
                   </Text>
                 </View>
                 <View
@@ -126,7 +146,7 @@ export default function MenuFull({ navigation }) {
                   <Text
                     style={{ fontWeight: "bold", color: "#fff", marginLeft: 5 }}
                   >
-                    {point} điểm
+                    {userData ? userData.point : "null"} Điểm
                   </Text>
                 </View>
                 <View

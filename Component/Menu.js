@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { View, Text, Image, StyleSheet } from "react-native";
 import { FontAwesome5 } from "@expo/vector-icons";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Menu() {
+ 
   return (
     <View
       style={{ marginTop: 44, justifyContent: "center", alignItems: "center" }}

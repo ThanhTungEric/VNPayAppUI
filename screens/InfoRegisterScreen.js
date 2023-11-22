@@ -84,11 +84,13 @@ const InfoRegister = () => {
             email,
             accountBalance: 0,
             point: 0,
+            history: [],
           }),
         });
         if (response.ok) {
           const userData = await response.json();
           await AsyncStorage.setItem('user', JSON.stringify(userData));
+          console.log('User created in InfoRegister.js:', userData);
           alert('Đăng ký thành công!');
           navigation.navigate('Login');
         } else {

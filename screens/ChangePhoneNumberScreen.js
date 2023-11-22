@@ -36,6 +36,7 @@ const ChangePhoneNumberScreen = () => {
         if (existingUser) {
           await AsyncStorage.setItem('user', JSON.stringify(existingUser));
           navigation.navigate("Login");
+          console.log('User found in ChangePhoneNumberScreen:', existingUser);
         } else {
           navigation.navigate("InfoRegister", { phoneNumber });
         }
