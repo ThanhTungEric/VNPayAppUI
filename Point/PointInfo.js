@@ -22,7 +22,9 @@ const PointInfo = ({ navigation, route }) => {
   };
 
   const closeModal = () => {
-    setModalVisible(false);
+    setTimeout(() => {
+      setModalVisible(false);
+    }, 14000);
   };
 
   return (

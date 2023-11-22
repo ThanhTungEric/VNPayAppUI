@@ -17,6 +17,8 @@ import TransferScreen from "./Lever2Screen/Transfer";
 import PointScreen from "./Point/PointScreen";
 import PointInfo from "./Point/PointInfo";
 
+import LoginScreen from "./screens/LoginScreen";
+
 const Stack = createStackNavigator();
 
 const HomeScreenNavigator = () => {
@@ -102,6 +104,7 @@ const WalletScreenNavigator = () => {
       />
       <Stack.Screen name="BalanceScreen" component={BalanceScreen} />
       <Stack.Screen name="AccountInfo" component={AccountInfo} />
+      <Stack.Screen name="LoginScreen" component={LoginScreen} />
     </Stack.Navigator>
   );
 };
