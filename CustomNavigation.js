@@ -14,6 +14,11 @@ import AmountScreen from "./Lever2Screen/Amount";
 import RechargeScreen from "./Lever2Screen/Recharge";
 import WithdrawScreen from "./Lever2Screen/Withdraw";
 import TransferScreen from "./Lever2Screen/Transfer";
+// Point
+import PointScreen from "./Point/PointScreen";
+import PointInfo from "./Point/PointInfo";
+
+import LoginScreen from "./screens/LoginScreen";
 
 // ScanQR
 import ScanQR from "./screens/ScanQR";
@@ -57,6 +62,17 @@ const HomeScreenNavigator = () => {
         name="Withdraw"
         component={WithdrawScreen}
         options={{ headerShown: false }}
+      />
+      {/* Point */}
+      <Stack.Screen
+        name="PointScreen"
+        component={PointScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="PointInfo"
+        component={PointInfo}
+        options={{ headerTitle: "Chi tiết quà" }}
       />
     </Stack.Navigator>
   );
@@ -133,6 +149,7 @@ const WalletScreenNavigator = () => {
           headerTitleAlign: "center",
           headerStyle: { height: 80 },
         }}/>
+      <Stack.Screen name="LoginScreen" component={LoginScreen} />
     </Stack.Navigator>
   );
 };

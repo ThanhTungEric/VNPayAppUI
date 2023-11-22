@@ -125,6 +125,29 @@ const Transfer = ({ navigation, route }) => {
   return (
     <ScrollView>
       <View>
+        {/* Header */}
+        {/* <View style={{ flexDirection: "row", marginTop: 40, paddingLeft: 20 }}>
+          <View>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("Amount", { amount });
+              }}
+            >
+              <AntDesign name="arrowleft" size={24} color="black" />
+            </TouchableOpacity>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              flex: 1,
+              justifyContent: "center",
+            }}
+          >
+            <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+              Chuyển tiền đến ví
+            </Text>
+          </View>
+        </View> */}
         {/* Input */}
         <View>
           <TextInput
