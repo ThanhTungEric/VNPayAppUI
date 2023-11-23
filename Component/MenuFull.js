@@ -53,6 +53,9 @@ export default function MenuFull({ navigation }) {
         if (userObject.accountBalance) {
           setAmount(userObject.accountBalance);
         }
+        if (userObject.point) {
+          setPoint(userObject.point);
+        }
       }
     } catch (error) {
       console.error('Error retrieving user data:', error);

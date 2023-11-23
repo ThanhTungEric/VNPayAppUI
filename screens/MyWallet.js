@@ -8,18 +8,12 @@ import {
   FlatList,
   Image,
 } from "react-native";
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect } from '@react-navigation/native';
 import { FontAwesome5 } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
-import { Ionicons } from "@expo/vector-icons";
-import { SimpleLineIcons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const data = [
   {
@@ -111,17 +105,36 @@ const getIconByName = (itemName) => {
     case "Đăng xuất":
       return "logout";
     default:
-      return "default-icon"; // Icon mặc định hoặc icon trống
+      return "default-icon";
   }
 };
 
 export default function MyWallet({ navigation }) {
+  const [userData, setUserData] = useState(null);
+  const [fullName, setFullName] = useState(null);
+  const [phone, setPhone] = useState(null);
+  const getUserData = async () => {
+    try {
+      const userData = await AsyncStorage.getItem('user');
+      if (userData !== null) {
+        const userObject = JSON.parse(userData);
+        setUserData(userObject);
+        setFullName(userObject.fullName);
+        setPhone(userObject.phone);
+        console.log("data ở Menufull.js", userObject);
+      }
+    } catch (error) {
+      console.error('Error retrieving user data:', error);
+    }
+  };
+  useFocusEffect(
+    React.useCallback(() => {
+      getUserData();
+    }, [])
+  );
+
   return (
     <View style={styles.myWalletScreen}>
-      {/* <Image
-        source={require("../assets/Voucher/header.jpg")}
-        style={styles.imgHeader}
-      ></Image> */}
       <Image
         style={styles.imgHeader}
         source={require("../assets/icons/ImageLogin.jpg")}
@@ -141,8 +154,8 @@ export default function MyWallet({ navigation }) {
           <View style={styles.UserBorder}>
             <FontAwesome5 name="user-alt" size={35} color="#b8b8b8" />
           </View>
-          <Text style={styles.UserName}>NGUYỄN THANH TÙNG</Text>
-          <Text style={styles.PhoneNumber}>0812718942</Text>
+          <Text style={styles.UserName}>{fullName}</Text>
+          <Text style={styles.PhoneNumber}>{phone}</Text>
         </View>
 
         <Text style={{ color: "#b9b9b9" }}>TÀI KHOẢN</Text>
@@ -153,9 +166,6 @@ export default function MyWallet({ navigation }) {
           renderItem={({ item }) => (
             <TouchableOpacity
               style={styles.AccountInfo}
-              onPress={() => {
-                openModal();
-              }}
             >
               <View style={{ flexDirection: "row" }}>
                 <FontAwesome5
@@ -197,17 +207,18 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   UserInfo: {
+    marginBottom: 20,
     width: "100%",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
   },
   UserName: {
-    fontSize: 15,
+    fontSize: 18,
     fontWeight: "bold",
   },
   PhoneNumber: {
-    fontSize: 12,
+    fontSize: 15,
     color: "#b9b9b9",
   },
   Account: {
@@ -218,8 +229,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1, // Add a 1 pixel bottom border
     borderBottomColor: "#b9b9b9", // Set the border color
     justifyContent: "space-between",
+    alignItems: "center",
     padding: 10,
     marginBottom: 10,
+    height: 60,
+
   },
   imgHeader: {
     width: "100%",

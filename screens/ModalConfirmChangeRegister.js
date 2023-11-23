@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   Container: {
     backgroundColor: "#fff",
     width: "90%",
-    height: "16%", // Adjust the height here
+    height: 150,
     alignSelf: "center",
     borderRadius: 10,
     padding: 7,

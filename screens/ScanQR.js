@@ -58,10 +58,10 @@ export default function ScanQR({ navigation }) {
           <MaterialCommunityIcons name="speedometer" size={24} color="#fff" />
           <Text style={{ color: "#fff" }}>Giao dịch gần đây</Text>
         </View>
-        <View style={{ alignItems: "center" }}>
+        <Pressable onPress={()=> {navigation.navigate("MyQR")}} style={{ alignItems: "center" }}>
           <MaterialCommunityIcons name="qrcode-scan" size={24} color="#fff" />
           <Text style={{ color: "#fff" }}>Mã QR của tôi</Text>
-        </View>
+        </Pressable>
       </View>
     </View>
   );

@@ -13,15 +13,15 @@ import { AntDesign } from "@expo/vector-icons";
 import { Alert } from "react-native";
 import { Pressable } from "react-native";
 
-function ConfirmMoney({ navigation, route }) {
+function ConfirmMoneyQR({ navigation, route }) {
   const [showAmount, setShowAmount] = React.useState(true);
   const [amount, setAmount] = useState(0);
   const [userData, setUserData] = useState(null);
   const { data, money, title } = route.params;
   const dataJson = JSON.parse(data);
-  console.log("data in ConfirmMoney của người nhận", dataJson.phone);
-  console.log("money in ConfirmMoney", money);
-  console.log("title in ConfirmMoney", title);
+  console.log("data in ConfirmMoneyQR của người nhận nhận", dataJson.id);
+  console.log("money in ConfirmMoneyQR", money);
+  console.log("title in ConfirmMoneyQR", title);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -98,7 +98,7 @@ function ConfirmMoney({ navigation, route }) {
               .then((response) => response.json())
               .then((json) => {
                 console.log("data của người nhận sau khi người gửi gửi: ", json);
-                navigation.navigate('Bill', { data, money, title });
+                navigation.navigate('BillQR', { data, money, title });
               })
           })
           .catch((error) => {
@@ -127,15 +127,16 @@ function ConfirmMoney({ navigation, route }) {
             borderRadius: 20,
           }}
         >
-          <View style={{ flexDirection: "row" }}>
+          <View style={{ flexDirection: "row", marginLeft: 20 }}>
             <Image
               source={require("../assets/Amount/logo.png")}
               style={{ width: 50, height: 50, resizeMode: "contain" }}
             ></Image>
-            <View style={{ flexDirection: "column" }}>
+            <View style={{ flexDirection: "column", marginLeft: 20 }}>
               <View style={{ flexDirection: "row" }}>
                 <Text>Số dư ví (VND)</Text>
                 <TouchableOpacity
+                    style={{ marginLeft: 10}}
                   onPress={() => {
                     setShowAmount(!showAmount);
                   }}
@@ -194,7 +195,7 @@ function ConfirmMoney({ navigation, route }) {
   )
 }
 
-export default ConfirmMoney;
+export default ConfirmMoneyQR;
 const styles = StyleSheet.create({
   key: {
     flexDirection: "row", paddingHorizontal: 20, justifyContent: "space-between", paddingVertical: 10

@@ -25,6 +25,9 @@ import LoginScreen from "./screens/LoginScreen";
 // ScanQR
 import ScanQR from "./screens/ScanQR";
 import FindPersion from "./Lever2Screen/FindPersion";
+import ConfirmMoneyQR from "./Lever2Screen/ConfirmMoneyQR";
+import BillQR from "./Lever2Screen/BillQR";
+import MyQR from "./Lever2Screen/MyQR";
 
 // Wallet
 import GeneralInfo from "./Lever2Screen/GeneralInfo";
@@ -148,6 +151,30 @@ const ScanQRScreenNavigator = () => {
         name="FindPersion"
         component={FindPersion}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ConfirmMoneyQR"
+        component={ConfirmMoneyQR}
+        options={{
+          title: "Xác nhận giao dịch",
+          headerTitleAlign: "center",
+          headerStyle: { height: 80 },
+        }}
+      />
+      <Stack.Screen
+        name="BillQR"
+        component={BillQR}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="MyQR"
+        component={MyQR}
+        options={{
+          title: "My QR",
+          headerTitleAlign: "center",
+          headerStyle: { height: 80 },
+        }}
+
       />
     </Stack.Navigator>
   );

@@ -115,14 +115,22 @@ const list = [
 ];
 
 const PointScreen = ({ navigation, route }) => {
-  const [filter, setFilter] = React.useState(menuItems); // Mảng lưu trữ các voucher đã lọc
+  const [filter, setFilter] = React.useState(menuItems);
   const [selectedItem, setSelectedItem] = React.useState(0);
 
   const handleMenuItemPress = (index) => {
     setSelectedItem(index);
   };
-
-  // const { point, currentPointt } = route.params;
+  React.useEffect(() => {
+    const newArr = list.filter((item) => {
+      if (menuItems[selectedItem] === "Tất cả") {
+        return true;
+      }
+      return item.type === menuItems[selectedItem];
+    });
+    setFilter(newArr);
+  }, [selectedItem]);
+  
   const { point } = route.params;
 
   return (
@@ -209,22 +217,6 @@ const PointScreen = ({ navigation, route }) => {
             ))}
           </View>
         </ScrollView>
-        {/* List */}
-
-        {/* <View style={{ justifyContent: "center", alignItems: "center" }}>
-          <View
-            style={{
-              width: "90%",
-              borderWidth: 1,
-            }}
-          >
-            <TextInput
-              style={{ width: "100%", height: 50, padding: 10, fontSize: 20 }}
-              placeholder="aaaaaaaa"
-            ></TextInput>
-          </View>
-        </View> */}
-
         <FlatList
           data={filter}
           renderItem={({ item }) => {

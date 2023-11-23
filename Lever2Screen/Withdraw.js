@@ -217,48 +217,7 @@ const Withdraw = ({ route, navigation }) => {
             </View>
           </View>
 
-          {/* Menh gia */}
-          {/* <View style={styles.coverDenomination}>
-            {denominations1.map((denomination, index) => (
-              <View key={index} style={styles.denominationContainer}>
-                <TouchableOpacity
-                  style={[
-                    styles.denomination,
-                    {
-                      borderColor:
-                        selectedDenomination1 === denomination
-                          ? "blue"
-                          : "gray",
-                    },
-                  ]}
-                  onPress={() => handleDenominationPress1(denomination)}
-                >
-                  <Text>{denomination}</Text>
-                </TouchableOpacity>
-              </View>
-            ))}
-          </View>
-
-          <View style={styles.coverDenomination}>
-            {denominations2.map((denomination, index) => (
-              <View key={index} style={styles.denominationContainer}>
-                <TouchableOpacity
-                  style={[
-                    styles.denomination,
-                    {
-                      borderColor:
-                        selectedDenomination2 === denomination
-                          ? "blue"
-                          : "gray",
-                    },
-                  ]}
-                  onPress={() => handleDenominationPress2(denomination)}
-                >
-                  <Text>{denomination}</Text>
-                </TouchableOpacity>
-              </View>
-            ))}
-          </View> */}
+          
         </View>
 
         {/* Nguồn tiền */}

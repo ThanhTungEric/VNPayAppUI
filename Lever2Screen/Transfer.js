@@ -161,7 +161,7 @@ const Transfer = ({ navigation, route }) => {
   return (
     <ScrollView>
       <View>
-        <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-around" }}>
+        <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", width: "90%"}}>
           <TextInput
             placeholder="Nhập tên hoặc SĐT"
             style={styles.input}
@@ -169,9 +169,9 @@ const Transfer = ({ navigation, route }) => {
             value={phone}
             keyboardType="numeric"
           ></TextInput>
-          <Pressable style={{width: 24, height: 24}} onPress={checkNumberPhone}>
-            <AntDesign name="arrowright" size={24} color="black" />
-          </Pressable>
+          <TouchableOpacity style={{ width: 45, height: 45, backgroundColor: "#024a9c", justifyContent: "center", alignItems: 'center', borderRadius: 50 }} onPress={checkNumberPhone}>
+            <AntDesign name="search1" size={24} color="#fff" />
+          </TouchableOpacity>
         </View>
         {/* Choice */}
         <View>
@@ -210,59 +210,59 @@ const Transfer = ({ navigation, route }) => {
             </View>
           </View>
         </View>
-        {userFinded ? (
-          <View style={{marginTop: 20 }}>
+        {userFinded && userFinded.length > 0 ? (
+          <View style={{ marginTop: 20 }}>
             <Text style={styles.phoneBook}>KẾT QUẢ TÌM KIẾM</Text>
-            <Pressable onPress={()=> {navigation.navigate("EnterMoney", {data: userFinded})}} style={{ flexDirection: "row", paddingLeft: 20, marginTop: 8 }}>
-              <Image source={require("../assets/Amount/avatarA.png")} style={{ width: 50, height: 50 }} />
+            <TouchableOpacity onPress={() => { navigation.navigate("EnterMoney", { data: userFinded }) }} style={{ flexDirection: "row", paddingLeft: 20, marginTop: 8, backgroundColor: "#87cefa", paddingVertical: 8 }}>
+              <Image source={require("../assets/Amount/avatarP.png")} style={{ width: 50, height: 50 }} />
               <View style={{ justifyContent: "center", marginLeft: 20 }}>
                 <Text style={{ fontWeight: "bold", fontSize: 16 }}>{nameUserFinded}</Text>
                 <Text style={{ fontSize: 16 }}>{phoneUserFinded}</Text>
               </View>
-            </Pressable>
+            </TouchableOpacity>
           </View>
-        ) : null}
-        {/* Danh bạ */}
-        <View>
-          <Text style={styles.phoneBook}>DANH BẠ</Text>
-          <SectionList
-            sections={phoneBook}
-            keyExtractor={(item, index) => item + index}
-            renderItem={({ item }) => (
-              <TouchableOpacity
-                style={{ borderRadius: 10, borderColor: "red" }}
+        ) :         <View>
+        <Text style={styles.phoneBook}>DANH BẠ</Text>
+        <SectionList
+          sections={phoneBook}
+          keyExtractor={(item, index) => item + index}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={{ borderRadius: 10, borderColor: "red" }}
+            >
+              <View
+                style={{
+                  flexDirection: "row",
+                  marginTop: 20,
+                }}
               >
-                <View
+                <Image
+                  source={item.image}
                   style={{
-                    flexDirection: "row",
-                    marginTop: 20,
+                    width: 50,
+                    height: 50,
+                    marginLeft: 20,
+                    resizeMode: "contain",
                   }}
-                >
-                  <Image
-                    source={item.image}
-                    style={{
-                      width: 50,
-                      height: 50,
-                      marginLeft: 20,
-                      resizeMode: "contain",
-                    }}
-                  />
-                  <View style={{ justifyContent: "center", marginLeft: 20 }}>
-                    <Text style={{ fontWeight: "bold" }}>{item.name}</Text>
-                    <Text>{item.phone}</Text>
-                  </View>
+                />
+                <View style={{ justifyContent: "center", marginLeft: 20 }}>
+                  <Text style={{ fontWeight: "bold" }}>{item.name}</Text>
+                  <Text>{item.phone}</Text>
                 </View>
-              </TouchableOpacity>
-            )}
-            renderSectionHeader={({ section: { title } }) => (
-              <Text
-                style={{ fontWeight: "bold", marginLeft: 20, marginTop: 20 }}
-              >
-                {title}
-              </Text>
-            )}
-          ></SectionList>
-        </View>
+              </View>
+            </TouchableOpacity>
+          )}
+          renderSectionHeader={({ section: { title } }) => (
+            <Text
+              style={{ fontWeight: "bold", marginLeft: 20, marginTop: 20 }}
+            >
+              {title}
+            </Text>
+          )}
+        ></SectionList>
+      </View>}
+
+
       </View>
     </ScrollView>
   );
