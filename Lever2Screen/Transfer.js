@@ -7,9 +7,14 @@ import {
   TextInput,
   SectionList,
   ScrollView,
+  Pressable,
 } from "react-native";
 import React from "react";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign } from '@expo/vector-icons';
+import { Alert } from "react-native";
+import { set } from "lodash";
+import { FontAwesome } from '@expo/vector-icons';
+
 
 const phoneBook = [
   {
@@ -121,27 +126,59 @@ const phoneBook = [
 ];
 
 const Transfer = ({ navigation, route }) => {
+  const [phone, setPhone] = React.useState("0787944346");
+  const [isValid, setIsValid] = React.useState(false);
+  const [phoneNumber, setPhoneNumber] = React.useState("");
+  const [userFinded, setUserFinded] = React.useState([]);
+  const [nameUserFinded, setNameUserFinded] = React.useState('');
+  const [phoneUserFinded, setPhoneUserFinded] = React.useState('');
 
-  
+  const checkNumberPhone = async () => {
+    const regex =
+      /^(086|096|097|098|039|038|037|036|035|034|032|033|091|094|088|083|084|085|081|082|070|079|077|076|078|089|090|093)\d{7}$/;
+    const validNum = regex.test(phone);
+    setIsValid(validNum);
 
-
-  const { amount } = route.params;
+    if (!validNum) {
+      Alert.alert("Số điện thoại không hợp lệ!", "Vui lòng nhập số điện thoại hợp lệ.");
+    } else {
+      try {
+        const response = await fetch('https://650c005f47af3fd22f66d7d8.mockapi.io/api/user');
+        const users = await response.json();
+        const existingUser = users.find((user) => user.phone === phone);
+        if (existingUser) {
+          const data = JSON.stringify(existingUser);
+          setUserFinded(data);
+          setNameUserFinded(existingUser.fullName);
+          setPhoneUserFinded(existingUser.phone);
+          console.log('User found in Transfer:', existingUser);
+        }
+      } catch (error) {
+        console.error('Error during phone number check:', error);
+      }
+    }
+  };
   return (
     <ScrollView>
       <View>
-        <View>
+        <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-around" }}>
           <TextInput
             placeholder="Nhập tên hoặc SĐT"
             style={styles.input}
+            onChangeText={(text) => setPhone(text)}
+            value={phone}
             keyboardType="numeric"
           ></TextInput>
+          <Pressable style={{width: 24, height: 24}} onPress={checkNumberPhone}>
+            <AntDesign name="arrowright" size={24} color="black" />
+          </Pressable>
         </View>
         {/* Choice */}
         <View>
           <View style={{ flexDirection: "row" }}>
             <Image
               source={require("../assets/Amount/transfer1.png")}
-              style={{ width: 50, height: 50, marginLeft: 20, marginTop: 20 }}
+              style={{ width: 50, height: 50, marginLeft: 20, marginTop: 20, borderRadius: 50 }}
             />
             <View
               style={{
@@ -158,7 +195,7 @@ const Transfer = ({ navigation, route }) => {
           <View style={{ flexDirection: "row" }}>
             <Image
               source={require("../assets/Amount/transfer2.png")}
-              style={{ width: 50, height: 50, marginLeft: 20, marginTop: 20 }}
+              style={{ width: 50, height: 50, marginLeft: 20, marginTop: 20, borderRadius: 50 }}
             />
             <View
               style={{
@@ -173,6 +210,18 @@ const Transfer = ({ navigation, route }) => {
             </View>
           </View>
         </View>
+        {userFinded ? (
+          <View style={{marginTop: 20 }}>
+            <Text style={styles.phoneBook}>KẾT QUẢ TÌM KIẾM</Text>
+            <Pressable onPress={()=> {navigation.navigate("EnterMoney", {data: userFinded})}} style={{ flexDirection: "row", paddingLeft: 20, marginTop: 8 }}>
+              <Image source={require("../assets/Amount/avatarA.png")} style={{ width: 50, height: 50 }} />
+              <View style={{ justifyContent: "center", marginLeft: 20 }}>
+                <Text style={{ fontWeight: "bold", fontSize: 16 }}>{nameUserFinded}</Text>
+                <Text style={{ fontSize: 16 }}>{phoneUserFinded}</Text>
+              </View>
+            </Pressable>
+          </View>
+        ) : null}
         {/* Danh bạ */}
         <View>
           <Text style={styles.phoneBook}>DANH BẠ</Text>
@@ -227,7 +276,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     color: "gray",
-    marginTop: 20,
     height: 50,
   },
   phoneBook: {

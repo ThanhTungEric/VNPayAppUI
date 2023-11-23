@@ -13,6 +13,9 @@ import AmountScreen from "./Lever2Screen/Amount";
 import RechargeScreen from "./Lever2Screen/Recharge";
 import WithdrawScreen from "./Lever2Screen/Withdraw";
 import TransferScreen from "./Lever2Screen/Transfer";
+import EnterMoney from "./Lever2Screen/EnterMoney";
+import ConfirmMoney from "./Lever2Screen/ConfirmMoney";
+import Bill from "./Lever2Screen/Bill";
 // Point
 import PointScreen from "./Point/PointScreen";
 import PointInfo from "./Point/PointInfo";
@@ -75,6 +78,25 @@ const HomeScreenNavigator = () => {
         name="PointInfo"
         component={PointInfo}
         options={{ headerTitle: "Chi tiết quà" }}
+      />
+      <Stack.Screen
+        name="EnterMoney"
+        component={EnterMoney}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="ConfirmMoney"
+        component={ConfirmMoney}
+        options={{
+          title: "Xác nhận giao dịch",
+          headerTitleAlign: "center",
+          headerStyle: { height: 80 },
+        }}
+      />
+      <Stack.Screen
+        name="Bill"
+        component={Bill}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );

@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { useFocusEffect } from '@react-navigation/native';
 import {
   View,
   Text,
@@ -38,26 +39,29 @@ export default function MenuFull({ navigation }) {
   const route = useRoute();
   const [amount, setAmount] = useState(0);
   const [showAmount, setShowAmount] = useState(true);
-  useEffect(() => {
-    const getUserData = async () => {
-      try {
-        const userData = await AsyncStorage.getItem('user');
-        if (userData !== null) {
-          const userObject = JSON.parse(userData);
-          console.log("data ở Menufull.js", userObject);
-          if (userObject.fullName) {
-            setUserData(userObject);
-          }
-          if (userObject.accountBalance) {
-            setAmount(userObject.accountBalance);
-          }
+
+  const getUserData = async () => {
+    try {
+      const userData = await AsyncStorage.getItem('user');
+      if (userData !== null) {
+        const userObject = JSON.parse(userData);
+        console.log("data ở Menufull.js", userObject);
+        if (userObject.fullName) {
+          setUserData(userObject);
         }
-      } catch (error) {
-        console.error('Error retrieving user data:', error);
+        if (userObject.accountBalance) {
+          setAmount(userObject.accountBalance);
+        }
       }
-    };
-    getUserData();
-  }, []);
+    } catch (error) {
+      console.error('Error retrieving user data:', error);
+    }
+  };
+  useFocusEffect(
+    React.useCallback(() => {
+      getUserData();
+    }, [])
+  );
 
   return (
     <View

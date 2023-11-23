@@ -24,7 +24,7 @@ const Amount = ({ route, navigation }) => {
         if (apiUserData.accountBalance) {
           setAmount(apiUserData.accountBalance);
         }
-        if(apiUserData.history) {
+        if (apiUserData.history) {
           setHistory(apiUserData.history);
         }
       }
@@ -48,6 +48,8 @@ const Amount = ({ route, navigation }) => {
         return require("../assets/Amount/chuyentien.png");
       case "3":
         return require("../assets/Amount/ruttien.png");
+      case "4":
+        return require("../assets/Amount/naptien.png");
       default:
         return require("../assets/Amount/naptien.png");
     }
@@ -177,7 +179,7 @@ const Amount = ({ route, navigation }) => {
           renderItem={({ item }) => {
             const imgSource = getImageSource(item.status);
             let priceColor;
-            if (item.header === "Nạp tiền") {
+            if (item.header === "Nạp tiền" || item.header === "Nhận tiền") {
               priceColor = "#6fc9a2";
             } else if (item.header === "Rút tiền") {
               priceColor = "#d93c43";
@@ -185,7 +187,7 @@ const Amount = ({ route, navigation }) => {
               priceColor = "blue";
             }
             let pricePrefix;
-            if (item.header === "Nạp tiền") {
+            if (item.header === "Nạp tiền" || item.header === "Nhận tiền") {
               pricePrefix = "+";
             } else if (
               item.header === "Rút tiền" ||
@@ -204,7 +206,7 @@ const Amount = ({ route, navigation }) => {
                     justifyContent: "space-between",
                   }}
                 >
-                  <View style={{ flexDirection: "row" }}>
+                  <View style={{ flexDirection: "row", width: "70%" }}>
                     <Image
                       style={{ width: 50, height: 50, resizeMode: "contain" }}
                       source={imgSource}
@@ -213,7 +215,7 @@ const Amount = ({ route, navigation }) => {
                       <Text style={{ fontSize: 16, fontWeight: "bold" }}>
                         {item.header}
                       </Text>
-                      <Text style={{ fontSize: 12 }}>{item.title}</Text>
+                      <Text style={{ fontSize: 12, flexWrap: 'wrap', paddingRight: 5 }}>{item.title}</Text>
                     </View>
                   </View>
 
