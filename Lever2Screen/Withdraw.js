@@ -60,6 +60,15 @@ const Withdraw = ({ route, navigation }) => {
   }, []);
 
   const subAmount = async () => {
+    if (!withdraw || isNaN(parseFloat(withdraw))) {
+      alert("Vui lòng nhập số tiền hợp lệ");
+      return;
+    }
+
+    if (parseFloat(withdraw) > userData.accountBalance) {
+      alert("Số tiền rút không được lớn hơn số dư ví");
+      return;
+    }
     try {
       const response = await fetch(
         `https://650c005f47af3fd22f66d7d8.mockapi.io/api/user/${userData.id}`,
