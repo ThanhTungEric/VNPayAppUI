@@ -8,8 +8,10 @@ import {
   FlatList,
   ScrollView,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { AntDesign } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 const bank = [
   {
     img: require("../assets/Amount/vietcom.png"),
@@ -35,6 +37,76 @@ const Withdraw = ({ route, navigation }) => {
   const { amount } = route.params;
   const [showAmount, setShowAmount] = useState(true);
   const [check, setCheck] = useState(false);
+  const [withdraw, setWithdraw] = useState();
+  const [userData, setUserData] = useState(null);
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const userData = await AsyncStorage.getItem("user");
+        console.log("userData", userData);
+        if (userData !== null) {
+          const userObject = JSON.parse(userData);
+          console.log("data ở Recharge.js", userObject);
+          setUserData(userObject);
+          if (userObject.accountBalance) {
+            setShowAmount(userObject.accountBalance);
+          }
+        }
+      } catch (error) {
+        console.error("Error retrieving user data:", error);
+      }
+    };
+    getUserData();
+  }, []);
+
+  const subAmount = async () => {
+    if (!withdraw || isNaN(parseFloat(withdraw))) {
+      alert("Vui lòng nhập số tiền hợp lệ");
+      return;
+    }
+
+    if (parseFloat(withdraw) > userData.accountBalance) {
+      alert("Số tiền rút không được lớn hơn số dư ví");
+      return;
+    }
+    try {
+      const response = await fetch(
+        `https://650c005f47af3fd22f66d7d8.mockapi.io/api/user/${userData.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            accountBalance: userData.accountBalance - withdraw,
+            history: [
+              ...userData.history,
+              {
+                status: "3",
+                header: "Rút tiền",
+                title: "Rút tiền thành công",
+                price: `${withdraw} VND`,
+                date: new Date().toLocaleDateString(),
+              },
+            ],
+          }),
+        }
+      );
+
+      if (response.ok) {
+        navigation.navigate("Amount");
+        console.log("response", response.status);
+      } else {
+        console.error(
+          "Failed to update amount. Server response:",
+          response.status
+        );
+      }
+    } catch (error) {
+      console.error("Error updating amount:", error);
+    }
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <ScrollView>
@@ -133,8 +205,14 @@ const Withdraw = ({ route, navigation }) => {
                   height: 50,
                   paddingLeft: 10,
                 }}
-                placeholder="Số tiền nạp (VND)"
+                placeholder="Số tiền rút(VND)"
                 keyboardType="numeric"
+                onChangeText={(text) => {
+                  setWithdraw(text);
+                  setCheck(true);
+                }}
+                value={withdraw}
+                type="number"
               ></TextInput>
             </View>
           </View>
@@ -228,6 +306,7 @@ const Withdraw = ({ route, navigation }) => {
           <FlatList
             data={bank}
             horizontal={true}
+            showsHorizontalScrollIndicator={false}
             renderItem={({ item }) => (
               <TouchableOpacity style={{ margin: 10 }}>
                 <Image
@@ -268,12 +347,7 @@ const Withdraw = ({ route, navigation }) => {
         >
           <TouchableOpacity
             style={{ alignItems: "center" }}
-            // onPress={() => {
-            //   if (check) {
-            //     navigation.navigate("Amount", { amount });
-            //   }
-            // }}
-            // onPress={addAmount}
+            onPress={subAmount}
           >
             <View
               style={[

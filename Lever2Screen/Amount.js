@@ -1,26 +1,27 @@
 import { StyleSheet, Text, View, Image, FlatList } from "react-native";
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect } from "@react-navigation/native";
 import React, { useCallback, useEffect, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Amount = ({ route, navigation }) => {
   const [showAmount, setShowAmount] = React.useState(true);
   const [amount, setAmount] = useState(0);
   const [userData, setUserData] = useState(null);
   const [history, setHistory] = useState([]);
+  console.log("history", history);
 
   const getUserData = async () => {
     try {
-      const storedUserData = await AsyncStorage.getItem('user');
+      const storedUserData = await AsyncStorage.getItem("user");
       if (storedUserData !== null) {
         const userObject = JSON.parse(storedUserData);
         const apiEndpoint = `https://650c005f47af3fd22f66d7d8.mockapi.io/api/user/${userObject.id}`;
         const response = await fetch(apiEndpoint);
         const apiUserData = await response.json();
-        await AsyncStorage.setItem('user', JSON.stringify(apiUserData));
+        await AsyncStorage.setItem("user", JSON.stringify(apiUserData));
         if (apiUserData.accountBalance) {
           setAmount(apiUserData.accountBalance);
         }
@@ -29,7 +30,7 @@ const Amount = ({ route, navigation }) => {
         }
       }
     } catch (error) {
-      console.error('Error retrieving or updating user data:', error);
+      console.error("Error retrieving or updating user data:", error);
     }
   };
 
@@ -38,7 +39,6 @@ const Amount = ({ route, navigation }) => {
       getUserData();
     }, [])
   );
-
 
   const getImageSource = (status) => {
     switch (status) {
@@ -54,7 +54,6 @@ const Amount = ({ route, navigation }) => {
         return require("../assets/Amount/naptien.png");
     }
   };
-
 
   return (
     <ScrollView>
@@ -157,7 +156,9 @@ const Amount = ({ route, navigation }) => {
         </TouchableOpacity>
       </View>
 
-      <ScrollView style={{ backgroundColor: "#fff", marginTop: 10, marginBottom: 50 }}>
+      <ScrollView
+        style={{ backgroundColor: "#fff", marginTop: 10, marginBottom: 50 }}
+      >
         <View
           style={{
             flexDirection: "row",
@@ -178,6 +179,9 @@ const Amount = ({ route, navigation }) => {
           data={history}
           renderItem={({ item }) => {
             const imgSource = getImageSource(item.status);
+            console.log(item.status);
+            console.log(imgSource);
+            console.log("item", item.header);
             let priceColor;
             if (item.header === "Nạp tiền" || item.header === "Nhận tiền") {
               priceColor = "#6fc9a2";

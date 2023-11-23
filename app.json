@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "vnpay-app-ui",
+    "name": "VNPAY",
     "slug": "vnpay-app-ui",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -21,10 +21,16 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.thanhtung15052001.vnpayappui"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "838a9b55-d67e-4634-a68b-edc3a4a84f2b"
+      }
     }
   }
 }

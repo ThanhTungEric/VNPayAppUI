@@ -16,7 +16,7 @@ import {
   MaterialIcons,
   AntDesign,
 } from "@expo/vector-icons";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 const getCurrentTime = () => {
   const currentDate = new Date();
   const currentHour = currentDate.getHours();
@@ -39,6 +39,7 @@ export default function MenuFull({ navigation }) {
   const route = useRoute();
   const [amount, setAmount] = useState(0);
   const [showAmount, setShowAmount] = useState(true);
+  const [point, setPoint] = useState();
 
   const getUserData = async () => {
     try {

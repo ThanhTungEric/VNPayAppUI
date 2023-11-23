@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const bank = [
   {
@@ -39,7 +39,7 @@ const Recharge = ({ navigation, route }) => {
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const userData = await AsyncStorage.getItem('user');
+        const userData = await AsyncStorage.getItem("user");
         if (userData !== null) {
           const userObject = JSON.parse(userData);
           console.log("data ở Recharge.js", userObject);
@@ -49,7 +49,7 @@ const Recharge = ({ navigation, route }) => {
           }
         }
       } catch (error) {
-        console.error('Error retrieving user data:', error);
+        console.error("Error retrieving user data:", error);
       }
     };
     getUserData();
@@ -78,42 +78,44 @@ const Recharge = ({ navigation, route }) => {
   const addAmount = async () => {
     if (selectedDenomination1 !== "" || selectedDenomination2 !== "") {
       try {
-        const denominationValue = selectedDenomination1 || selectedDenomination2;
+        const denominationValue =
+          selectedDenomination1 || selectedDenomination2;
         const apiEndpoint = `https://650c005f47af3fd22f66d7d8.mockapi.io/api/user/${userData.id}`; // Replace with your API endpoint
         const response = await fetch(apiEndpoint, {
-          method: 'PUT',
+          method: "PUT",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            accountBalance: userData.accountBalance + parseInt(denominationValue),
+            accountBalance:
+              userData.accountBalance + parseInt(denominationValue),
             history: [
               ...userData.history,
               {
-                status: '1',
-                header: 'Nạp tiền',
-                title: 'Nạp tiền vào ví',
+                status: "1",
+                header: "Nạp tiền",
+                title: "Nạp tiền vào ví",
                 price: `${denominationValue} VND`,
                 date: new Date().toLocaleDateString(),
               },
             ],
           }),
         });
-  
+
         if (response.ok) {
-          navigation.navigate('Amount');
+          navigation.navigate("Amount");
+          console.log("response", response.status);
         } else {
-          console.error('Failed to update amount. Server response:', response.status);
+          console.error(
+            "Failed to update amount. Server response:",
+            response.status
+          );
         }
       } catch (error) {
-        console.error('Error updating amount:', error);
+        console.error("Error updating amount:", error);
       }
     }
   };
-  
-  
-
-
 
   return (
     <View style={{ flex: 1 }}>
