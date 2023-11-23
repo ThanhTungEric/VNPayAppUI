@@ -8,8 +8,9 @@ import {
   FlatList,
   ScrollView,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const bank = [
   {
@@ -33,7 +34,27 @@ const bank = [
 ];
 
 const Recharge = ({ navigation, route }) => {
-  const { amount } = route.params;
+  const [userData, setUserData] = useState(null);
+  const [amount, setAmount] = useState(0);
+  useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const userData = await AsyncStorage.getItem("user");
+        if (userData !== null) {
+          const userObject = JSON.parse(userData);
+          console.log("data ở Recharge.js", userObject);
+          setUserData(userObject);
+          if (userObject.accountBalance) {
+            setAmount(userObject.accountBalance);
+          }
+        }
+      } catch (error) {
+        console.error("Error retrieving user data:", error);
+      }
+    };
+    getUserData();
+  }, []);
+
   const [showAmount, setShowAmount] = useState(true);
   const [check, setCheck] = useState(false);
 
@@ -45,21 +66,54 @@ const Recharge = ({ navigation, route }) => {
 
   const handleDenominationPress1 = (denomination) => {
     setSelectedDenomination1(denomination);
-    setSelectedDenomination2(""); // Deselect the denomination in the other group
+    setSelectedDenomination2("");
     setCheck(true);
   };
 
   const handleDenominationPress2 = (denomination) => {
     setSelectedDenomination2(denomination);
-    setSelectedDenomination1(""); // Deselect the denomination in the other group
+    setSelectedDenomination1("");
     setCheck(true);
   };
-  const addAmount = () => {
+  const addAmount = async () => {
     if (selectedDenomination1 !== "" || selectedDenomination2 !== "") {
-      // Convert selectedDenomination to a number and add it to the current amount
-      const denominationValue = selectedDenomination1 || selectedDenomination2;
-      const updatedAmount = amount + denominationValue;
-      navigation.navigate("Amount", { amount: updatedAmount });
+      try {
+        const denominationValue =
+          selectedDenomination1 || selectedDenomination2;
+        const apiEndpoint = `https://650c005f47af3fd22f66d7d8.mockapi.io/api/user/${userData.id}`; // Replace with your API endpoint
+        const response = await fetch(apiEndpoint, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            accountBalance:
+              userData.accountBalance + parseInt(denominationValue),
+            history: [
+              ...userData.history,
+              {
+                status: "1",
+                header: "Nạp tiền",
+                title: "Nạp tiền vào ví",
+                price: `${denominationValue} VND`,
+                date: new Date().toLocaleDateString(),
+              },
+            ],
+          }),
+        });
+
+        if (response.ok) {
+          navigation.navigate("Amount");
+          console.log("response", response.status);
+        } else {
+          console.error(
+            "Failed to update amount. Server response:",
+            response.status
+          );
+        }
+      } catch (error) {
+        console.error("Error updating amount:", error);
+      }
     }
   };
 
@@ -73,28 +127,6 @@ const Recharge = ({ navigation, route }) => {
             paddingBottom: 30,
           }}
         >
-          <View
-            style={{ flexDirection: "row", marginTop: 30, paddingLeft: 20 }}
-          >
-            <View>
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate("Amount", { amount });
-                }}
-              >
-                <AntDesign name="arrowleft" size={24} color="black" />
-              </TouchableOpacity>
-            </View>
-            <View
-              style={{
-                flexDirection: "row",
-                flex: 1,
-                justifyContent: "center",
-              }}
-            >
-              <Text style={{ fontSize: 20, fontWeight: "bold" }}>Nạp tiền</Text>
-            </View>
-          </View>
           {/* Thong tin so du vi */}
           <View
             style={{
@@ -169,9 +201,9 @@ const Recharge = ({ navigation, route }) => {
                 }
                 onChangeText={(text) => {
                   if (selectedDenomination1 !== "") {
-                    setSelectedDenomination1(Number(text)); // Convert back to a number
+                    setSelectedDenomination1(Number(text));
                   } else {
-                    setSelectedDenomination2(Number(text)); // Convert back to a number
+                    setSelectedDenomination2(Number(text));
                   }
                 }}
               ></TextInput>
@@ -267,6 +299,7 @@ const Recharge = ({ navigation, route }) => {
           <FlatList
             data={bank}
             horizontal={true}
+            showsHorizontalScrollIndicator={false}
             renderItem={({ item }) => (
               <TouchableOpacity style={{ margin: 10 }}>
                 <Image

@@ -1,126 +1,58 @@
 import { StyleSheet, Text, View, Image, FlatList } from "react-native";
-import React from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useCallback, useEffect, useState } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
 import { ScrollView } from "react-native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-const array = [
-  {
-    img: require("../assets/Amount/naptien.png"),
-    header: "Nạp tiền",
-    title: "Nạp tiền vào ví",
-    price: "10.000.000 VND",
-    date: "30/10/2023",
-  },
-  {
-    img: require("../assets/Amount/chuyentien.png"),
-    header: "Chuyển tiền",
-    title: "Chuyển tiền cho bạn bè",
-    price: "7.000.000 VND",
-    date: "10/10/2023",
-  },
-  {
-    img: require("../assets/Amount/ruttien.png"),
-    header: "Rút tiền",
-    title: "Rút tiền từ ví",
-    price: "8.000.000 VND",
-    date: "10/10/2023",
-  },
-  {
-    img: require("../assets/Amount/naptien.png"),
-    header: "Nạp tiền",
-    title: "Nạp tiền vào ví",
-    price: "300.000 VND",
-    date: "8/10/2023",
-  },
-  {
-    img: require("../assets/Amount/chuyentien.png"),
-    header: "Chuyển tiền",
-    title: "Chuyển tiền cho bạn bè",
-    price: "100.000 VND",
-    date: "7/10/2023",
-  },
-  {
-    img: require("../assets/Amount/ruttien.png"),
-    header: "Rút tiền",
-    title: "Rút tiền từ ví",
-    price: "8.000.000 VND",
-    date: "10/10/2023",
-  },
-  {
-    img: require("../assets/Amount/naptien.png"),
-    header: "Nạp tiền",
-    title: "Nạp tiền vào ví",
-    price: "300.000 VND",
-    date: "8/10/2023",
-  },
-  {
-    img: require("../assets/Amount/chuyentien.png"),
-    header: "Chuyển tiền",
-    title: "Chuyển tiền cho bạn bè",
-    price: "100.000 VND",
-    date: "7/10/2023",
-  },
-  {
-    img: require("../assets/Amount/naptien.png"),
-    header: "Nạp tiền",
-    title: "Nạp tiền vào ví",
-    price: "300.000 VND",
-    date: "8/10/2023",
-  },
-  {
-    img: require("../assets/Amount/chuyentien.png"),
-    header: "Chuyển tiền",
-    title: "Chuyển tiền cho bạn bè",
-    price: "100.000 VND",
-    date: "7/10/2023",
-  },
-  {
-    img: require("../assets/Amount/naptien.png"),
-    header: "Nạp tiền",
-    title: "Nạp tiền vào ví",
-    price: "300.000 VND",
-    date: "8/10/2023",
-  },
-  {
-    img: require("../assets/Amount/chuyentien.png"),
-    header: "Chuyển tiền",
-    title: "Chuyển tiền cho bạn bè",
-    price: "100.000 VND",
-    date: "7/10/2023",
-  },
-  {
-    img: require("../assets/Amount/naptien.png"),
-    header: "Nạp tiền",
-    title: "Nạp tiền vào ví",
-    price: "300.000 VND",
-    date: "8/10/2023",
-  },
-  {
-    img: require("../assets/Amount/chuyentien.png"),
-    header: "Chuyển tiền",
-    title: "Chuyển tiền cho bạn bè",
-    price: "100.000 VND",
-    date: "7/10/2023",
-  },
-  {
-    img: require("../assets/Amount/naptien.png"),
-    header: "Nạp tiền",
-    title: "Nạp tiền vào ví",
-    price: "300.000 VND",
-    date: "8/10/2023",
-  },
-  {
-    img: require("../assets/Amount/chuyentien.png"),
-    header: "Chuyển tiền",
-    title: "Chuyển tiền cho bạn bè",
-    price: "100.000 VND",
-    date: "7/10/2023",
-  },
-];
 const Amount = ({ route, navigation }) => {
-  const { amount } = route.params;
   const [showAmount, setShowAmount] = React.useState(true);
+  const [amount, setAmount] = useState(0);
+  const [userData, setUserData] = useState(null);
+  const [history, setHistory] = useState([]);
+  console.log("history", history);
+
+  const getUserData = async () => {
+    try {
+      const storedUserData = await AsyncStorage.getItem("user");
+      if (storedUserData !== null) {
+        const userObject = JSON.parse(storedUserData);
+        const apiEndpoint = `https://650c005f47af3fd22f66d7d8.mockapi.io/api/user/${userObject.id}`;
+        const response = await fetch(apiEndpoint);
+        const apiUserData = await response.json();
+        await AsyncStorage.setItem("user", JSON.stringify(apiUserData));
+        if (apiUserData.accountBalance) {
+          setAmount(apiUserData.accountBalance);
+        }
+        if (apiUserData.history) {
+          setHistory(apiUserData.history);
+        }
+      }
+    } catch (error) {
+      console.error("Error retrieving or updating user data:", error);
+    }
+  };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      getUserData();
+    }, [])
+  );
+
+  const getImageSource = (status) => {
+    switch (status) {
+      case "1":
+        return require("../assets/Amount/naptien.png");
+      case "2":
+        return require("../assets/Amount/chuyentien.png");
+      case "3":
+        return require("../assets/Amount/ruttien.png");
+      default:
+        return require("../assets/Amount/naptien.png");
+    }
+  };
+
   return (
     <ScrollView>
       <View
@@ -169,10 +101,6 @@ const Amount = ({ route, navigation }) => {
             {showAmount ? amount : "*********"}
           </Text>
 
-          <Text style={{ fontSize: 11 }}>Số dư khả dụng (VND)</Text>
-          <Text style={{ fontSize: 15, fontWeight: "bold" }}>
-            {showAmount ? amount : "*********"}
-          </Text>
           <TouchableOpacity onPress={() => setShowAmount(!showAmount)}>
             <AntDesign
               name={showAmount ? "eye" : "eyeo"}
@@ -226,7 +154,9 @@ const Amount = ({ route, navigation }) => {
         </TouchableOpacity>
       </View>
 
-      <ScrollView style={{ backgroundColor: "#fff", marginTop: 10 }}>
+      <ScrollView
+        style={{ backgroundColor: "#fff", marginTop: 10, marginBottom: 50 }}
+      >
         <View
           style={{
             flexDirection: "row",
@@ -244,8 +174,12 @@ const Amount = ({ route, navigation }) => {
           </TouchableOpacity>
         </View>
         <FlatList
-          data={array}
+          data={history}
           renderItem={({ item }) => {
+            const imgSource = getImageSource(item.status);
+            console.log(item.status);
+            console.log(imgSource);
+            console.log("item", item.header);
             let priceColor;
             if (item.header === "Nạp tiền") {
               priceColor = "#6fc9a2";
@@ -277,13 +211,13 @@ const Amount = ({ route, navigation }) => {
                   <View style={{ flexDirection: "row" }}>
                     <Image
                       style={{ width: 50, height: 50, resizeMode: "contain" }}
-                      source={item.img}
+                      source={imgSource}
                     ></Image>
                     <View style={{ marginTop: 10, marginLeft: 10 }}>
                       <Text style={{ fontSize: 16, fontWeight: "bold" }}>
                         {item.header}
                       </Text>
-                      <Text style={{ fontSize: 12 }}>{item.title}</Text>
+                      <Text style={{ fontSize: 12 }}>{item.title} </Text>
                     </View>
                   </View>
 

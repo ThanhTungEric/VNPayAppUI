@@ -3,7 +3,6 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { Image } from "react-native";
 import MyWallet from "./screens/MyWallet";
 import BalanceScreen from "./Lever2Screen/BalanceScreen";
-// import AccountInfo from "./WalletComponent/AccountInfo";
 // Voucher
 import VoucherScreen from "./screens/VoucherScreen";
 import InfoVoucher from "./Lever2Screen/InfoVoucher";
@@ -147,7 +146,6 @@ const WalletScreenNavigator = () => {
         options={{ headerShown: false }}
       />
       <Stack.Screen name="BalanceScreen" component={BalanceScreen} />
-      {/* <Stack.Screen name="AccountInfo" component={AccountInfo} /> */}
       <Stack.Screen
         name="GeneralInfo"
         component={GeneralInfo}
