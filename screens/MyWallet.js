@@ -133,6 +133,12 @@ export default function MyWallet({ navigation }) {
     }, [])
   );
 
+  const handlePress = ({id}) => {
+    if (id === 1) {
+      navigation.navigate("AccountInfor");
+    }
+  }
+
   return (
     <View style={styles.myWalletScreen}>
       <Image
@@ -166,6 +172,7 @@ export default function MyWallet({ navigation }) {
           renderItem={({ item }) => (
             <TouchableOpacity
               style={styles.AccountInfo}
+              onPress={() => handlePress(item)}
             >
               <View style={{ flexDirection: "row" }}>
                 <FontAwesome5

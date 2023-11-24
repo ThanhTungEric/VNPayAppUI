@@ -87,9 +87,11 @@ export default function MenuFull({ navigation }) {
               <View style={styles.cricleUser}>
                 <Octicons name="search" size={24} color="black" />
               </View>
-              <View style={styles.cricleUser}>
+              <TouchableOpacity
+                onPress={() => navigation.navigate("Noti")}
+              style={styles.cricleUser}>
                 <FontAwesome name="envelope-o" size={24} color="black" />
-              </View>
+              </TouchableOpacity>
             </View>
           </View>
         </View>

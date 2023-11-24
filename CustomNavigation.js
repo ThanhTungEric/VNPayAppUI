@@ -16,6 +16,7 @@ import TransferScreen from "./Lever2Screen/Transfer";
 import EnterMoney from "./Lever2Screen/EnterMoney";
 import ConfirmMoney from "./Lever2Screen/ConfirmMoney";
 import Bill from "./Lever2Screen/Bill";
+import Noti from "./Lever2Screen/Noti";
 // Point
 import PointScreen from "./Point/PointScreen";
 import PointInfo from "./Point/PointInfo";
@@ -31,6 +32,7 @@ import MyQR from "./Lever2Screen/MyQR";
 
 // Wallet
 import GeneralInfo from "./Lever2Screen/GeneralInfo";
+import AccountInfor from "./Lever2Screen/AccountInfor";
 
 const Stack = createStackNavigator();
 
@@ -101,6 +103,15 @@ const HomeScreenNavigator = () => {
         name="Bill"
         component={Bill}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Noti"
+        component={Noti}
+        options={{
+          title: "Thông báo",
+          headerTitleAlign: "center",
+          headerStyle: { height: 80 },
+        }}
       />
     </Stack.Navigator>
   );
@@ -205,6 +216,15 @@ const WalletScreenNavigator = () => {
         }}
       />
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
+      <Stack.Screen
+        name="AccountInfor"
+        component={AccountInfor}
+        options={{
+          title: "Thông tin tài khoản",
+          headerTitleAlign: "center",
+          headerStyle: { height: 80 },
+        }}
+      />
     </Stack.Navigator>
   );
 };

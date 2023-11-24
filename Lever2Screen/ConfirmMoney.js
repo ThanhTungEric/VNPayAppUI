@@ -100,6 +100,30 @@ function ConfirmMoney({ navigation, route }) {
                 console.log("data của người nhận sau khi người gửi gửi: ", json);
                 navigation.navigate('Bill', { data, money, title });
               })
+              .catch((error) => {
+                const apiEndpoint = `https://650c005f47af3fd22f66d7d8.mockapi.io/api/user/${userData.id}`;
+                fetch(apiEndpoint, {
+                  method: 'PUT',
+                  headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({
+                    accountBalance: Number(userData.accountBalance) - Number(money),
+                    history: [
+                      ...userData.history,
+                      {
+                        status: '2',
+                        header: 'Chuyển tiền',
+                        title: title,
+                        price: money,
+                        date: new Date().toLocaleDateString(),
+                      }
+                    ]
+                  })
+                })
+                console.error(error);
+              });
           })
           .catch((error) => {
             console.error(error);
