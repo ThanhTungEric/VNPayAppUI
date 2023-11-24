@@ -157,7 +157,7 @@ const Amount = ({ route, navigation }) => {
       </View>
 
       <ScrollView
-        style={{ backgroundColor: "#fff", marginTop: 10, marginBottom: 50 }}
+        style={{ backgroundColor: "#fff", marginTop: 10, marginBottom: 90 }}
       >
         <View
           style={{
@@ -219,7 +219,15 @@ const Amount = ({ route, navigation }) => {
                       <Text style={{ fontSize: 16, fontWeight: "bold" }}>
                         {item.header}
                       </Text>
-                      <Text style={{ fontSize: 12, flexWrap: 'wrap', paddingRight: 5 }}>{item.title}</Text>
+                      <Text
+                        style={{
+                          fontSize: 12,
+                          flexWrap: "wrap",
+                          paddingRight: 5,
+                        }}
+                      >
+                        {item.title}
+                      </Text>
                     </View>
                   </View>
 

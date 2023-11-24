@@ -2,7 +2,6 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-
 import Chat from "../screens/Chat";
 import MyWallet from "../screens/MyWallet";
 import VoucherScreen from "../screens/VoucherScreen";
@@ -30,166 +29,158 @@ const screenOptions = {
     left: 0,
     right: 0,
     elevation: 0,
-    height: 60,
+    height: 80,
   },
 };
 
 export default function TabNavigation() {
   return (
-      <Tab.Navigator screenOptions={screenOptions}>
-        <Tab.Screen
-          name="Home"
-          component={HomeScreenNavigator}
-          options={{
-            tabBarIcon: ({ focused }) => {
-              const iconSource = focused
-                ? require("../assets/icons/homeVnpay.png")
-                : require("../assets/icons/homeVnpay2.png");
+    <Tab.Navigator screenOptions={screenOptions}>
+      <Tab.Screen
+        name="Home"
+        component={HomeScreenNavigator}
+        options={{
+          tabBarIcon: ({ focused }) => {
+            const iconSource = focused
+              ? require("../assets/icons/homeVnpay.png")
+              : require("../assets/icons/homeVnpay2.png");
 
-              const textColor = focused ? "#204c8b" : "#bababa";
-              return (
-                <View
-                  style={{ alignItems: "center", justifyContent: "center" }}
-                >
-                  <Image
-                    style={{ height: 25, width: 25, resizeMode: "contain" }}
-                    source={iconSource}
-                  />
-                  <Text
-                    style={{
-                      fontSize: 12,
-                      color: textColor,
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Trang chủ
-                  </Text>
-                </View>
-              );
-            },
-          }}
-        />
-
-        <Tab.Screen
-          name="voucher"
-          component={VoucherScreenNavigator}
-          options={{
-            tabBarIcon: ({ focused }) => {
-              return (
-                <View
-                  style={{ alignItems: "center", justifyContent: "center" }}
-                >
-                  <MaterialCommunityIcons
-                    name="ticket-confirmation-outline"
-                    size={26}
-                    color={focused ? "#204c8b" : "#bababa"}
-                  />
-                  <Text
-                    style={{
-                      fontSize: 12,
-                      color: focused ? "#204c8b" : "#bababa",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Ưu đãi
-                  </Text>
-                </View>
-              );
-            },
-          }}
-        />
-        <Tab.Screen
-          name="scanQR"
-          component={ScanQRScreenNavigator}
-          options={{
-            tabBarStyle: { display: "none" },
-            tabBarIcon: ({ focused }) => {
-              return (
-                <View
+            const textColor = focused ? "#204c8b" : "#bababa";
+            return (
+              <View style={{ alignItems: "center", justifyContent: "center" }}>
+                <Image
+                  style={{ height: 25, width: 25, resizeMode: "contain" }}
+                  source={iconSource}
+                />
+                <Text
                   style={{
-                    top: Platform.OS === "ios" ? -10 : -20,
-                    width: Platform.OS === "ios" ? 50 : 60,
-                    height: Platform.OS === "ios" ? 50 : 60,
-                    borderRadius: Platform.OS === "ios" ? 25 : 30,
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backgroundColor: "#fff",
+                    fontSize: 12,
+                    color: textColor,
+                    fontWeight: "bold",
                   }}
                 >
-                  <Image
-                    style={{ width: 60, height: 60, resizeMode: "contain" }}
-                    source={require("../assets/icons/scanQRimg.png")}
-                  />
-                  <Text
-                    style={{
-                      fontSize: 12,
-                      color: focused ? "#204c8b" : "#bababa",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Quét QR
-                  </Text>
-                </View>
-              );
-            },
-          }}
-        />
-        <Tab.Screen
-          name="chat"
-          component={Chat}
-          options={{
-            tabBarIcon: ({ focused }) => {
-              return (
-                <View
-                  style={{ alignItems: "center", justifyContent: "center" }}
+                  Trang chủ
+                </Text>
+              </View>
+            );
+          },
+        }}
+      />
+
+      <Tab.Screen
+        name="voucher"
+        component={VoucherScreenNavigator}
+        options={{
+          tabBarIcon: ({ focused }) => {
+            return (
+              <View style={{ alignItems: "center", justifyContent: "center" }}>
+                <MaterialCommunityIcons
+                  name="ticket-confirmation-outline"
+                  size={26}
+                  color={focused ? "#204c8b" : "#bababa"}
+                />
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: focused ? "#204c8b" : "#bababa",
+                    fontWeight: "bold",
+                  }}
                 >
-                  <AntDesign
-                    name="message1"
-                    size={24}
-                    color={focused ? "#204c8b" : "#bababa"}
-                  />
-                  <Text
-                    style={{
-                      fontSize: 12,
-                      color: focused ? "#204c8b" : "#bababa",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Chat
-                  </Text>
-                </View>
-              );
-            },
-          }}
-        />
-        <Tab.Screen
-          name="myWallet"
-          component={WalletScreenNavigator}
-          options={{
-            tabBarIcon: ({ focused }) => {
-              return (
-                <View
-                  style={{ alignItems: "center", justifyContent: "center" }}
+                  Ưu đãi
+                </Text>
+              </View>
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="scanQR"
+        component={ScanQRScreenNavigator}
+        options={{
+          tabBarStyle: { display: "none" },
+          tabBarIcon: ({ focused }) => {
+            return (
+              <View
+                style={{
+                  top: Platform.OS === "ios" ? -10 : -20,
+                  width: Platform.OS === "ios" ? 50 : 60,
+                  height: Platform.OS === "ios" ? 50 : 60,
+                  borderRadius: Platform.OS === "ios" ? 25 : 30,
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: "#fff",
+                }}
+              >
+                <Image
+                  style={{ width: 60, height: 60, resizeMode: "contain" }}
+                  source={require("../assets/icons/scanQRimg.png")}
+                />
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: focused ? "#204c8b" : "#bababa",
+                    fontWeight: "bold",
+                  }}
                 >
-                  <AntDesign
-                    name="wallet"
-                    size={26}
-                    color={focused ? "#204c8b" : "#bababa"}
-                  />
-                  <Text
-                    style={{
-                      fontSize: 12,
-                      color: focused ? "#204c8b" : "#bababa",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Ví của tôi
-                  </Text>
-                </View>
-              );
-            },
-          }}
-        />
-      </Tab.Navigator>
+                  Quét QR
+                </Text>
+              </View>
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="chat"
+        component={Chat}
+        options={{
+          tabBarIcon: ({ focused }) => {
+            return (
+              <View style={{ alignItems: "center", justifyContent: "center" }}>
+                <AntDesign
+                  name="message1"
+                  size={24}
+                  color={focused ? "#204c8b" : "#bababa"}
+                />
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: focused ? "#204c8b" : "#bababa",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Chat
+                </Text>
+              </View>
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="myWallet"
+        component={WalletScreenNavigator}
+        options={{
+          tabBarIcon: ({ focused }) => {
+            return (
+              <View style={{ alignItems: "center", justifyContent: "center" }}>
+                <AntDesign
+                  name="wallet"
+                  size={26}
+                  color={focused ? "#204c8b" : "#bababa"}
+                />
+                <Text
+                  style={{
+                    fontSize: 12,
+                    color: focused ? "#204c8b" : "#bababa",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Ví của tôi
+                </Text>
+              </View>
+            );
+          },
+        }}
+      />
+    </Tab.Navigator>
   );
 }

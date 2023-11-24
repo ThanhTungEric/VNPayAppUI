@@ -19,7 +19,7 @@ import ConfirmModal from "./ModalConfirmChangeRegister";
 export default function LoginScreen() {
   const navigation = useNavigation();
   const [password, setPassword] = useState("");
-  const [name, setDefaultName] = useState("Nguyễn Thanh Tùng");
+  const [name, setDefaultName] = useState("nulll");
   const [isModalVisible, setModalVisible] = useState(false);
   const [userData, setUserData] = useState(null);
   

@@ -10,11 +10,10 @@ import {
   Pressable,
 } from "react-native";
 import React from "react";
-import { AntDesign } from '@expo/vector-icons';
+import { AntDesign } from "@expo/vector-icons";
 import { Alert } from "react-native";
 import { set } from "lodash";
-import { FontAwesome } from '@expo/vector-icons';
-
+import { FontAwesome } from "@expo/vector-icons";
 
 const phoneBook = [
   {
@@ -130,8 +129,8 @@ const Transfer = ({ navigation, route }) => {
   const [isValid, setIsValid] = React.useState(false);
   const [phoneNumber, setPhoneNumber] = React.useState("");
   const [userFinded, setUserFinded] = React.useState([]);
-  const [nameUserFinded, setNameUserFinded] = React.useState('');
-  const [phoneUserFinded, setPhoneUserFinded] = React.useState('');
+  const [nameUserFinded, setNameUserFinded] = React.useState("");
+  const [phoneUserFinded, setPhoneUserFinded] = React.useState("");
 
   const checkNumberPhone = async () => {
     const regex =
@@ -140,10 +139,15 @@ const Transfer = ({ navigation, route }) => {
     setIsValid(validNum);
 
     if (!validNum) {
-      Alert.alert("Số điện thoại không hợp lệ!", "Vui lòng nhập số điện thoại hợp lệ.");
+      Alert.alert(
+        "Số điện thoại không hợp lệ!",
+        "Vui lòng nhập số điện thoại hợp lệ."
+      );
     } else {
       try {
-        const response = await fetch('https://650c005f47af3fd22f66d7d8.mockapi.io/api/user');
+        const response = await fetch(
+          "https://650c005f47af3fd22f66d7d8.mockapi.io/api/user"
+        );
         const users = await response.json();
         const existingUser = users.find((user) => user.phone === phone);
         if (existingUser) {
@@ -151,17 +155,26 @@ const Transfer = ({ navigation, route }) => {
           setUserFinded(data);
           setNameUserFinded(existingUser.fullName);
           setPhoneUserFinded(existingUser.phone);
-          console.log('User found in Transfer:', existingUser);
+          console.log("User found in Transfer:", existingUser);
         }
       } catch (error) {
-        console.error('Error during phone number check:', error);
+        console.error("Error during phone number check:", error);
       }
     }
   };
   return (
     <ScrollView>
       <View>
-        <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", width: "90%"}}>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "space-between",
+            width: "90%",
+            paddingHorizontal: 20,
+            paddingTop: 20,
+          }}
+        >
           <TextInput
             placeholder="Nhập tên hoặc SĐT"
             style={styles.input}
@@ -169,7 +182,17 @@ const Transfer = ({ navigation, route }) => {
             value={phone}
             keyboardType="numeric"
           ></TextInput>
-          <TouchableOpacity style={{ width: 45, height: 45, backgroundColor: "#024a9c", justifyContent: "center", alignItems: 'center', borderRadius: 50 }} onPress={checkNumberPhone}>
+          <TouchableOpacity
+            style={{
+              width: 45,
+              height: 45,
+              backgroundColor: "#024a9c",
+              justifyContent: "center",
+              alignItems: "center",
+              borderRadius: 50,
+            }}
+            onPress={checkNumberPhone}
+          >
             <AntDesign name="search1" size={24} color="#fff" />
           </TouchableOpacity>
         </View>
@@ -178,7 +201,13 @@ const Transfer = ({ navigation, route }) => {
           <View style={{ flexDirection: "row" }}>
             <Image
               source={require("../assets/Amount/transfer1.png")}
-              style={{ width: 50, height: 50, marginLeft: 20, marginTop: 20, borderRadius: 50 }}
+              style={{
+                width: 50,
+                height: 50,
+                marginLeft: 20,
+                marginTop: 20,
+                borderRadius: 50,
+              }}
             />
             <View
               style={{
@@ -195,7 +224,13 @@ const Transfer = ({ navigation, route }) => {
           <View style={{ flexDirection: "row" }}>
             <Image
               source={require("../assets/Amount/transfer2.png")}
-              style={{ width: 50, height: 50, marginLeft: 20, marginTop: 20, borderRadius: 50 }}
+              style={{
+                width: 50,
+                height: 50,
+                marginLeft: 20,
+                marginTop: 20,
+                borderRadius: 50,
+              }}
             />
             <View
               style={{
@@ -213,56 +248,72 @@ const Transfer = ({ navigation, route }) => {
         {userFinded && userFinded.length > 0 ? (
           <View style={{ marginTop: 20 }}>
             <Text style={styles.phoneBook}>KẾT QUẢ TÌM KIẾM</Text>
-            <TouchableOpacity onPress={() => { navigation.navigate("EnterMoney", { data: userFinded }) }} style={{ flexDirection: "row", paddingLeft: 20, marginTop: 8, backgroundColor: "#87cefa", paddingVertical: 8 }}>
-              <Image source={require("../assets/Amount/avatarP.png")} style={{ width: 50, height: 50 }} />
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("EnterMoney", { data: userFinded });
+              }}
+              style={{
+                flexDirection: "row",
+                paddingLeft: 20,
+                marginTop: 8,
+                backgroundColor: "#87cefa",
+                paddingVertical: 8,
+              }}
+            >
+              <Image
+                source={require("../assets/Amount/avatarP.png")}
+                style={{ width: 50, height: 50 }}
+              />
               <View style={{ justifyContent: "center", marginLeft: 20 }}>
-                <Text style={{ fontWeight: "bold", fontSize: 16 }}>{nameUserFinded}</Text>
+                <Text style={{ fontWeight: "bold", fontSize: 16 }}>
+                  {nameUserFinded}
+                </Text>
                 <Text style={{ fontSize: 16 }}>{phoneUserFinded}</Text>
               </View>
             </TouchableOpacity>
           </View>
-        ) :         <View>
-        <Text style={styles.phoneBook}>DANH BẠ</Text>
-        <SectionList
-          sections={phoneBook}
-          keyExtractor={(item, index) => item + index}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              style={{ borderRadius: 10, borderColor: "red" }}
-            >
-              <View
-                style={{
-                  flexDirection: "row",
-                  marginTop: 20,
-                }}
-              >
-                <Image
-                  source={item.image}
-                  style={{
-                    width: 50,
-                    height: 50,
-                    marginLeft: 20,
-                    resizeMode: "contain",
-                  }}
-                />
-                <View style={{ justifyContent: "center", marginLeft: 20 }}>
-                  <Text style={{ fontWeight: "bold" }}>{item.name}</Text>
-                  <Text>{item.phone}</Text>
-                </View>
-              </View>
-            </TouchableOpacity>
-          )}
-          renderSectionHeader={({ section: { title } }) => (
-            <Text
-              style={{ fontWeight: "bold", marginLeft: 20, marginTop: 20 }}
-            >
-              {title}
-            </Text>
-          )}
-        ></SectionList>
-      </View>}
-
-
+        ) : (
+          <View>
+            <Text style={styles.phoneBook}>DANH BẠ</Text>
+            <SectionList
+              sections={phoneBook}
+              keyExtractor={(item, index) => item + index}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  style={{ borderRadius: 10, borderColor: "red" }}
+                >
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      marginTop: 20,
+                    }}
+                  >
+                    <Image
+                      source={item.image}
+                      style={{
+                        width: 50,
+                        height: 50,
+                        marginLeft: 20,
+                        resizeMode: "contain",
+                      }}
+                    />
+                    <View style={{ justifyContent: "center", marginLeft: 20 }}>
+                      <Text style={{ fontWeight: "bold" }}>{item.name}</Text>
+                      <Text>{item.phone}</Text>
+                    </View>
+                  </View>
+                </TouchableOpacity>
+              )}
+              renderSectionHeader={({ section: { title } }) => (
+                <Text
+                  style={{ fontWeight: "bold", marginLeft: 20, marginTop: 20 }}
+                >
+                  {title}
+                </Text>
+              )}
+            ></SectionList>
+          </View>
+        )}
       </View>
     </ScrollView>
   );
